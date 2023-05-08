@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import img1 from '../images/slider1.jpg';
 const slideData = [
     {
-        imageUrl: img1,
+        imageUrl: '/src/layouts/Universal/images/slider1.jpg',
         title: 'Eat until you pass out!',
         description:
             "We don't judge here. In fact, we encourage you to indulge in our delicious burgers, pizzas, and sushi until you can't move. Who needs a gym membership anyway?",

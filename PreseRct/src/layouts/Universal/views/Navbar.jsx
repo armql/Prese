@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import axiosClient from '../../../axios';
-import navLinks from '../data/NavLinksData';
 import { useStateContext } from '../../../contexts/ContextProvider';
 
 export default function Navbar() {
@@ -20,21 +19,64 @@ export default function Navbar() {
         })
     };
 
+
+    const guestLinks = [
+        { to: '/home', text: 'Home' },
+        { to: '/aboutus', text: 'About' },
+        { to: '/ourlocations', text: 'Our Locations' },
+        { to: '/login', text: 'Login' },
+        { to: '/signup', text: 'Signup' },
+        { to: '/guest', text: 'Guest' },
+    ]
+    const customerLinks = [
+        { to: '/home', text: 'Home' },
+        { to: '/aboutus', text: 'About' },
+        { to: '/ourlocations', text: 'Our Locations' },
+        { to: `/user`, text: `user` },
+        { to: '/logout', text: 'Log out' },
+    ]
+    const employeeLinks = [
+        { to: '/home', text: 'Home' },
+        { to: '/aboutus', text: 'About' },
+        { to: '/ourlocations', text: 'Our Locations' },
+        { to: `/user`, text: `employee` },
+        { to: '/logout', text: 'Log out' },
+    ]
+    const driverLinks = [
+        { to: '/home', text: 'Home' },
+        { to: '/aboutus', text: 'About' },
+        { to: '/ourlocations', text: 'Our Locations' },
+        { to: `/user`, text: `driver` },
+        { to: '/logout', text: 'Log out' },
+    ]
+    const managerLinks = [
+        { to: 'dashboard', text: 'Dashboard' },
+        { to: 'aboutus', text: 'About' },
+        { to: 'ourlocations', text: 'Our Locations' },
+        { to: 'userlist', text: 'User List' },
+        { to: 'productlist', text: 'Product List' },
+        { to: 'm/categorylist', text: 'Category List' },
+        { to: 'm/categoryregister', text: 'Register List' },
+        { to: '/admin', text: `manager` },
+        { to: '/logout', text: 'Log out' },
+    ]
+
+
     let filteredLinks;
     if (userToken) {
         if (currentUser.user_role === 'customer') {
-            filteredLinks = navLinks.customerLinks;
+            filteredLinks = customerLinks;
         } else if (currentUser.user_role === 'employee') {
-            filteredLinks = navLinks.employeeLinks;
+            filteredLinks = employeeLinks;
         } else if (currentUser.user_role === 'driver') {
-            filteredLinks = navLinks.driverLinks;
+            filteredLinks = driverLinks;
         } else if (currentUser.user_role === 'manager') {
-            filteredLinks = navLinks.managerLinks;
+            filteredLinks = managerLinks;
         }
     } else {
-        filteredLinks = navLinks.guestLinks;
+        filteredLinks = guestLinks;
     }
-
+    
     return (
         <nav className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-60">
             <div className="max-w-screen-l flex flex-wrap items-center justify-between mx-auto p-3 ">

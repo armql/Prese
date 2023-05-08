@@ -8,6 +8,10 @@ import Home from "./layouts/Universal/views/Home";
 import AboutUs from "./layouts/Universal/views/AboutUs";
 import Login from "./layouts/Guest/views/Login";
 import Signup from "./layouts/Guest/views/Signup";
+import Dashboard from "./layouts/Manager/views/Dashboard";
+import CategoryList from "./layouts/Manager/views/CategoryList";
+import CategoryRegister from "./layouts/Manager/components/CategoryRegister";
+import CategoryEdit from "./layouts/Manager/components/CategoryEdit";
 
 const router = createBrowserRouter([
     {
@@ -119,11 +123,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/m',
-                element: <Navigate to="home" />
+                element: <Navigate to="dashboard" />
             },
             {
-                path: 'home',
-                element: <Home />
+                path: 'dashboard',
+                element: <Dashboard />
             },
             {
                 path: 'aboutus',
@@ -136,7 +140,19 @@ const router = createBrowserRouter([
             {
                 path: 'signup',
                 element: <Signup />
-            }
+            },
+            {
+                path: 'categorylist',
+                element: <CategoryList />
+            },
+            {
+                path: 'categoryregister',
+                element: <CategoryRegister />
+            },
+            {
+                path: 'categorylist/:id/categoryedit',
+                element: <CategoryEdit/>
+            },
         ]
     }
 ])

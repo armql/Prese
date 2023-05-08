@@ -21,7 +21,6 @@ export const ContextProvider = ({ children }) => {
             const data = await response.json();
             setCurrentUser({
                 ...data,
-                user_role: data.user_role ?? "customer",
             });
         };
 
