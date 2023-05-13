@@ -18,10 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->decimal('market_price', 10, 2);
             $table->decimal('retail_price', 10, 2);
-            $table->string('image_path');
+            $table->string('preview');
             $table->timestamps();
             
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }

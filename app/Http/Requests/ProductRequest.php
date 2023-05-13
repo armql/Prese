@@ -24,12 +24,13 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'preview' => 'required', // optional image file
             'name' => 'required|string|max:255',
-            'category_id' => ['required', 'exists:categories,id'],
+            'category_id' => 'required',
             'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'quantity' => 'required|integer|min:0',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // optional image file
+            'retail_price' => 'required|numeric|min:0',
+            'market_price' => 'required|numeric|min:0',
+            'user_id' => 'required|integer',
         ];
     }
 
@@ -41,22 +42,22 @@ class ProductRequest extends FormRequest
     public function messages(): array
     {
         return [
+            // 'preview.image' => 'Product image must be an image file.',
+            // 'preview.mimes' => 'Product image must be a file of type: jpeg, png, jpg, gif.',
+            // 'preview.max' => 'Product image may not be greater than 2mb.',
             'name.required' => 'Product name is required.',
             'name.string' => 'Product name must be a string.',
             'name.max' => 'Product name may not be greater than 255 characters.',
             'category_id.required' => 'Category ID is required.',
-            'category_id.exists' => 'Invalid category ID.',
+            // 'category_id.exists' => 'Invalid category ID.',
             'description.required' => 'Product description is required.',
             'description.string' => 'Product description must be a string.',
-            'price.required' => 'Product price is required.',
-            'price.numeric' => 'Product price must be a number.',
-            'price.min' => 'Product price must be greater than or equal to 0.',
-            'quantity.required' => 'Product quantity is required.',
-            'quantity.integer' => 'Product quantity must be an integer.',
-            'quantity.min' => 'Product quantity must be greater than or equal to 0.',
-            'image.image' => 'Product image must be an image file.',
-            'image.mimes' => 'Product image must be a file of type: jpeg, png, jpg, gif.',
-            'image.max' => 'Product image may not be greater than 2mb.',
+            'retail_price.required' => 'Product retail price is required.',
+            'retail_price.numeric' => 'Product retail price must be a number.',
+            'retail_price.min' => 'Product retail price must be greater than or equal to 0.',
+            'market_price.required' => 'Product market price is required.',
+            'market_price.numeric' => 'Product market price must be a number.',
+            'market_price.min' => 'Product market price must be greater than or equal to 0.',
         ];
     }
 }

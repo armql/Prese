@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'image',
+        'preview',
         'name',
         'description',
         'retail_price',
@@ -23,10 +23,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
-    public function getImageUrlAttribute()
+    public function user()
     {
-        return asset('storage/' . $this->image);
+        return $this->belongsTo(User::class);
     }
 
     public function getRetailPriceFormattedAttribute()

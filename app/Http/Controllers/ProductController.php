@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -18,14 +20,17 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
+        // Retrieve the category ID based on the name
+        $category = Category::where('name', $data['category_id'])->first();
+
         /** @var \App\Models\Product $product */
         $product = Product::create([
-            'image' => $data['image'],
+            'preview' => $data['preview'],
             'name' => $data['name'],
             'description' => $data['description'],
             'retail_price' => $data['retail_price'],
             'market_price' => $data['market_price'],
-            'category_id' => $data['category_id'],
+            'category_id' => $category->id,
             'user_id' => $data['user_id'],
         ]);
 
@@ -35,7 +40,6 @@ class ProductController extends Controller
             'product' => $product,
         ]);
     }
-
     /**
      * Update an existing product.
      *
@@ -57,7 +61,7 @@ class ProductController extends Controller
         }
 
         $product->update([
-            'image' => $data['image'],
+            'preview' => $data['preview'],
             'name' => $data['name'],
             'description' => $data['description'],
             'retail_price' => $data['retail_price'],
@@ -167,16 +171,45 @@ class ProductController extends Controller
         ], 200);
     }
 
-    public function paginate(Request $request)
-    {
-        $perPage = $request->input('per_page', 10);
-        $page = $request->input('page', 1);
 
-        $products = Product::paginate($perPage, ['*'], 'page', $page);
+
+    public function index()
+    {
+        $product = Product::all();
+        if ($product->count() > 0) {
+            return response()->json([
+                'status' => 200,
+                'product' => $product
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'no records found'
+            ], 404);
+        }
+    }
+
+    /**
+     * Get the name of a user based on their ID.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getCatName(int $id)
+    {
+        $user = DB::table('categories')->select('name')->where('id', $id)->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
 
         return response()->json([
             'status' => 'success',
-            'products' => $products
-        ], 200);
+            'name' => $user->name
+        ]);
     }
+
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -167,18 +168,18 @@ class CategoryController extends Controller
         ], 200);
     }
 
-    public function paginate(Request $request)
-    {
-        $perPage = $request->input('per_page', 10);
-        $page = $request->input('page', 1);
+    // public function paginate(Request $request)
+    // {
+    //     $perPage = $request->input('per_page', 10);
+    //     $page = $request->input('page', 1);
 
-        $category = Category::paginate($perPage, ['*'], 'page', $page);
+    //     $category = Category::paginate($perPage, ['*'], 'page', $page);
 
-        return response()->json([
-            'status' => 'success',
-            'category' => $category
-        ], 200);
-    }
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'category' => $category
+    //     ], 200);
+    // }
 
     public function index()
     {
@@ -191,8 +192,41 @@ class CategoryController extends Controller
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'no records found'
+                'message' => 'no category records found'
             ], 404);
         }
+    }
+
+    /**
+     * Get the name of a user based on their ID.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserName(int $id)
+    {
+        $user = DB::table('users')->select('name')->where('id', $id)->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'name' => $user->name
+        ]);
+    }
+
+
+    public function categoryname()
+    {
+        $categories = Category::all('name');
+        return response()->json([
+            'status' => 200,
+            'categories' => $categories
+        ], 200);
     }
 }

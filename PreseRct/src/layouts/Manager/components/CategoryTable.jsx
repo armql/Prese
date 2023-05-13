@@ -1,35 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import axiosClient from '../../../axios'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function CategoryTable() {
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState([]);
+    const [users, setUsers] = useState({});
 
     useEffect(() => {
         axiosClient.get('category').then(res => {
-            console.log(res.data);
             if (Array.isArray(res.data.category)) {
                 setCategory(res.data.category);
             } else {
                 setCategory([]);
             }
             setLoading(false);
+
+            res.data.category.forEach((item) => {
+                axiosClient.get(`users/${item.user_id}/name`).then(res => {
+                    const name = res.data.name;
+                    setUsers(prevState => ({
+                        ...prevState,
+                        [item.user_id]: name
+                    }));
+                }).catch(error => {
+                    console.error(error);
+                });
+            });
         }).catch(error => {
             console.error(error);
             setLoading(false);
         });
-
-        axiosClient.get('users').then(res => {
-            const usersObject = {};
-            res.data.users.forEach(user => {
-                usersObject[user.id] = user.name;
-            });
-            setUsers(usersObject);
-        }).catch(error => {
-            console.error(error);
-        });
     }, []);
+
+    // if (loadingSpinner) {
+    //     return (
+    //         <div role="status">
+    //             <svg aria-hidden="true" class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+    //                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+    //             </svg>
+    //             <span class="sr-only">Loading...</span>
+    //         </div>
+    //     );
+    // }
 
 
     if (loading) {
@@ -80,36 +95,115 @@ export default function CategoryTable() {
                     <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
                     <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
                 </div>
-                <span className="sr-only">Loading...</span>
+                <div className="flex items-center justify-between pt-4">
+                    <div>
+                        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                        <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    </div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                    <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                </div>
+                <div className="flex items-center justify-between pt-4">
+                    <div>
+                        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                        <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    </div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                    <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                </div>
+                <div className="flex items-center justify-between pt-4">
+                    <div>
+                        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                        <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    </div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                    <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                </div>
+                <div className="flex items-center justify-between pt-4">
+                    <div>
+                        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                        <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    </div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                    <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                </div>
+                <div className="flex items-center justify-between pt-4">
+                    <div>
+                        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                        <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    </div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                    <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                </div>
+                <div className="flex items-center justify-between pt-4">
+                    <div>
+                        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                        <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    </div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                    <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                </div>
             </div>
-
         )
     }
 
     const deleteCategory = (e, id) => {
         e.preventDefault();
-
         const thisClicked = e.currentTarget;
         thisClicked.innerText = 'Deleting...';
 
-        axiosClient
-            .delete(`category/${id}/delete`)
-            .then((res) => {
-                alert(res.data.message);
-                thisClicked.closest('tr').remove();
-            })
-            .catch(function (error) {
-                if (error.response) {
-                    if (error.response.status === 404) {
-                        alert(error.response.data.message);
-                        thisClicked.innerText = 'Delete';
-                    }
-                    if (error.response.status === 500) {
-                        alert(error.response.data);
-                    }
-                }
-            });
-    }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosClient
+                    .delete(`category/${id}/delete`)
+                    .then((res) => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted',
+                            text: res.data.message,
+                        }).then(() => {
+                            thisClicked.closest('tr').remove();
+                        });
+                    })
+                    .catch(function (error) {
+                        if (error.response) {
+                            if (error.response.status === 404) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: error.response.data.message,
+                                });
+                                thisClicked.innerText = 'Delete';
+                            } else if (error.response.status === 500) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: error.response.data,
+                                });
+                                thisClicked.innerText = 'Delete';
+                            }
+                        }
+                    });
+            } else {
+                thisClicked.innerText = `Delete`;
+            }
+        });
+    };
+
 
     let categoryDetails = '';
     categoryDetails = (category.map((item, index) => {
@@ -124,10 +218,10 @@ export default function CategoryTable() {
                     <div className="text-sm font-medium text-gray-900">{item.name}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">{createdDate.toDateString()}</div>
+                    <div className="text-sm text-gray-500 text-center">{createdDate.toDateString()}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500 underline">{item.user_id}</div>
+                    <div className="text-sm text-gray-500 underline text-center">{users[item.user_id]}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center justify-center active:scale-105">
@@ -164,10 +258,10 @@ export default function CategoryTable() {
                         <th className="px-6 py-3 text-xs text-start font-medium text-gray-500 uppercase tracking-wider">
                             Category Name
                         </th>
-                        <th className="px-6 py-3 text-xs text-start font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
                             Date Created
                         </th>
-                        <th className="px-6 py-3 text-xs text-start font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
                             Created by
                         </th>
                         <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">

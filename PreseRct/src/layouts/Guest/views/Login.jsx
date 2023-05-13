@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useStateContext } from '../../../contexts/ContextProvider';
 import { useState } from "react";
 import axiosClient from "../../../axios";
+import Swal from 'sweetalert2'
 
 export default function Login() {
-  const { setCurrentUser, setUserToken } = useStateContext();
+  const { currentUser, setCurrentUser, setUserToken } = useStateContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ __html: "" });
@@ -25,7 +26,23 @@ export default function Login() {
       .then(({ data }) => {
         setCurrentUser(data.user);
         setUserToken(data.token);
-        navigate('/');
+        if (data.user.user_role === 'manager') {
+          Swal.fire(
+            `Hello ${data.user.name}!`,
+            `Welcome back ${data.user.user_role}.`,
+            'info'
+            )
+            navigate('/management');
+        }else if (data.user.user_role === 'employee' || data.user.user_role === 'driver') {
+          Swal.fire(
+            `Hello ${data.user.name}!`,
+            `Welcome back ${data.user.user_role}.`,
+            'info'
+            )
+            navigate('/workspace');
+        }else if (data.user.user_role === 'customer') {
+            navigate('/app');
+        }
       })
       .catch((error) => {
         if (error.response) {
@@ -38,6 +55,7 @@ export default function Login() {
         console.error(error);
       });
   };
+
 
   return (
     <div><section className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-20">

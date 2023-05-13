@@ -38,6 +38,7 @@ export default function Signup() {
       });
   };
 
+
   return (
     <div><section className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-20">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

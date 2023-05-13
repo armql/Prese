@@ -12,6 +12,8 @@ import Dashboard from "./layouts/Manager/views/Dashboard";
 import CategoryList from "./layouts/Manager/views/CategoryList";
 import CategoryRegister from "./layouts/Manager/components/CategoryRegister";
 import CategoryEdit from "./layouts/Manager/components/CategoryEdit";
+import ProductList from "./layouts/Manager/views/ProductList";
+import ProductRegister from "./layouts/Manager/components/ProductRegister";
 
 const router = createBrowserRouter([
     {
@@ -41,11 +43,11 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/c',
+        path: '/app',
         element: <CustomerLayout />,
         children: [
             {
-                path: '/c',
+                path: '/app',
                 element: <Navigate to="home" />
             },
             {
@@ -55,22 +57,14 @@ const router = createBrowserRouter([
             {
                 path: 'aboutus',
                 element: <AboutUs />
-            },
-            {
-                path: 'login',
-                element: <Login />
-            },
-            {
-                path: 'signup',
-                element: <Signup />
             }
         ]
     }, {
-        path: '/e',
+        path: '/workspace',
         element: <EmployeeLayout />,
         children: [
             {
-                path: '/e',
+                path: '/workspace',
                 element: <Navigate to="home" />
             },
             {
@@ -80,23 +74,15 @@ const router = createBrowserRouter([
             {
                 path: 'aboutus',
                 element: <AboutUs />
-            },
-            {
-                path: 'login',
-                element: <Login />
-            },
-            {
-                path: 'signup',
-                element: <Signup />
             }
         ]
     },
     {
-        path: '/d',
+        path: '/workdrive',
         element: <DriverLayout />,
         children: [
             {
-                path: '/d',
+                path: '/workdrive',
                 element: <Navigate to="home" />
             },
             {
@@ -107,39 +93,19 @@ const router = createBrowserRouter([
                 path: 'aboutus',
                 element: <AboutUs />
             },
-            {
-                path: 'login',
-                element: <Login />
-            },
-            {
-                path: 'signup',
-                element: <Signup />
-            }
         ]
     },
     {
-        path: '/m',
+        path: '/management',
         element: <ManagerLayout />,
         children: [
             {
-                path: '/m',
+                path: '/management',
                 element: <Navigate to="dashboard" />
             },
             {
                 path: 'dashboard',
                 element: <Dashboard />
-            },
-            {
-                path: 'aboutus',
-                element: <AboutUs />
-            },
-            {
-                path: 'login',
-                element: <Login />
-            },
-            {
-                path: 'signup',
-                element: <Signup />
             },
             {
                 path: 'categorylist',
@@ -151,8 +117,20 @@ const router = createBrowserRouter([
             },
             {
                 path: 'categorylist/:id/categoryedit',
-                element: <CategoryEdit/>
+                element: <CategoryEdit />
             },
+            {
+                path: 'productlist',
+                element: <ProductList />
+            },
+            {
+                path: 'productregister',
+                element: <ProductRegister />
+            }
+            // {
+            //     path: 'productlist/:id/productedit',
+            //     element: <ProductEdit/>
+            // },
         ]
     }
 ])

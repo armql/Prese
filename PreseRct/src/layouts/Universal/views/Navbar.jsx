@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import axiosClient from '../../../axios';
 import { useStateContext } from '../../../contexts/ContextProvider';
+import navLinksData from '../data/NavLinksData'
 
 export default function Navbar() {
     // ^ stored data collection & makes logout functional
@@ -12,71 +13,30 @@ export default function Navbar() {
     const logout = (ev) => {
         ev.preventDefault();
 
-        axiosClient.post("/logout").then((res) => {
+        axiosClient.post("/logout").then(() => {
             setCurrentUser({});
             setUserToken(null);
-            navigate('/');
+            navigate('/home');
         })
     };
 
-
-    const guestLinks = [
-        { to: '/home', text: 'Home' },
-        { to: '/aboutus', text: 'About' },
-        { to: '/ourlocations', text: 'Our Locations' },
-        { to: '/login', text: 'Login' },
-        { to: '/signup', text: 'Signup' },
-        { to: '/guest', text: 'Guest' },
-    ]
-    const customerLinks = [
-        { to: '/home', text: 'Home' },
-        { to: '/aboutus', text: 'About' },
-        { to: '/ourlocations', text: 'Our Locations' },
-        { to: `/user`, text: `user` },
-        { to: '/logout', text: 'Log out' },
-    ]
-    const employeeLinks = [
-        { to: '/home', text: 'Home' },
-        { to: '/aboutus', text: 'About' },
-        { to: '/ourlocations', text: 'Our Locations' },
-        { to: `/user`, text: `employee` },
-        { to: '/logout', text: 'Log out' },
-    ]
-    const driverLinks = [
-        { to: '/home', text: 'Home' },
-        { to: '/aboutus', text: 'About' },
-        { to: '/ourlocations', text: 'Our Locations' },
-        { to: `/user`, text: `driver` },
-        { to: '/logout', text: 'Log out' },
-    ]
-    const managerLinks = [
-        { to: 'dashboard', text: 'Dashboard' },
-        { to: 'aboutus', text: 'About' },
-        { to: 'ourlocations', text: 'Our Locations' },
-        { to: 'userlist', text: 'User List' },
-        { to: 'productlist', text: 'Product List' },
-        { to: 'm/categorylist', text: 'Category List' },
-        { to: 'm/categoryregister', text: 'Register List' },
-        { to: '/admin', text: `manager` },
-        { to: '/logout', text: 'Log out' },
-    ]
 
 
     let filteredLinks;
     if (userToken) {
         if (currentUser.user_role === 'customer') {
-            filteredLinks = customerLinks;
+            filteredLinks = navLinksData.customerLinks;
         } else if (currentUser.user_role === 'employee') {
-            filteredLinks = employeeLinks;
+            filteredLinks = navLinksData.employeeLinks;
         } else if (currentUser.user_role === 'driver') {
-            filteredLinks = driverLinks;
+            filteredLinks = navLinksData.driverLinks;
         } else if (currentUser.user_role === 'manager') {
-            filteredLinks = managerLinks;
+            filteredLinks = navLinksData.managerLinks;     
         }
     } else {
-        filteredLinks = guestLinks;
+        filteredLinks = navLinksData.guestLinks;
     }
-    
+
     return (
         <nav className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-60">
             <div className="max-w-screen-l flex flex-wrap items-center justify-between mx-auto p-3 ">

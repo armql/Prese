@@ -50,7 +50,14 @@ const CategoryEdit = () => {
         axiosClient
             .put(`/category/${id}`, data)
             .then((res) => {
-                alert(res.data.message);
+                Swal.fire({
+                    icon: "success",
+                    text: res.data.message,
+                }).then(
+                    () => {
+                        navigate('../categorylist')
+                    }
+                );
             })
             .catch(function (error) {
                 if (error.response) {
@@ -89,8 +96,8 @@ const CategoryEdit = () => {
                         <form onSubmit={(event) => updateCategory(event, currentUser ? currentUser.id : '')} className="space-y-4 md:space-y-6">
                             <input type="hidden" name="user_id" value={currentUser ? currentUser.id : ''} />
                             <div>
-                                <label htmlFor="preview" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Preview name</label>
-                                <input type="text" value={preview.name} onChange={handleInput} name="name" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500" required="" />
+                                <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category name</label>
+                                <input type="text" value={category.name} onChange={handleInput} name="name" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500" required="" />
                             </div>
                             <div className="p-1">
                                 <span className="text-red">{inputErrorList.name}</span>

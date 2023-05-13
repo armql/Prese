@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosClient from '../../../axios';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function CategoryRegister() {
   const { currentUser } = useStateContext();
@@ -25,16 +26,22 @@ export default function CategoryRegister() {
 
   const addCategory = (event) => {
     event.preventDefault();
-  
+
     const formData = new FormData();
     formData.append('name', category.name);
     formData.append('user_id', category.user_id);
-  
+
     axiosClient
-      .post(`/category`, formData)
+      .post(`category`, formData)
       .then((res) => {
-        alert(res.data.message);
-        navigate('../categorylist');
+        Swal.fire({
+          icon: "success",
+          text: res.data.message,
+        }).then(
+          () => {
+            navigate('../categorylist')
+          }
+        );
       })
       .catch(function (error) {
         if (error.response) {
@@ -47,7 +54,7 @@ export default function CategoryRegister() {
         }
       });
   };
-  
+
 
   return (
     <div><section className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-20">
@@ -64,7 +71,7 @@ export default function CategoryRegister() {
               <input type="hidden" name="user_id" value={currentUser ? currentUser.id : ''} />
               <div>
                 <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category name</label>
-                <input type="category" value={category.name} onChange={handleInput} name="name" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500" placeholder="Johndoe" required="" />
+                <input type="category" value={category.name} onChange={handleInput} name="name" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500" placeholder="Category" required="" />
               </div>
               <div className="p-1">
                 <span className="text-red">{inputErrorList.name}</span>

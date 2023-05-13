@@ -31,7 +31,6 @@ const navLinks = {
     ],
     managerLinks: [
         { to: 'dashboard', text: 'Dashboard' },
-        { to: 'aboutus', text: 'About' },
         { to: 'ourlocations', text: 'Our Locations' },
         { to: 'userlist', text: 'User List' },
         { to: 'productlist', text: 'Product List' },
