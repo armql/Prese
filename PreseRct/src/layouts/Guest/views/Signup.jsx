@@ -8,7 +8,6 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [error, setError] = useState({ __html: '' });
-
   const navigate = useNavigate();
 
   const onSubmit = (ev) => {

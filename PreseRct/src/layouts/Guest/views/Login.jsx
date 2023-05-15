@@ -9,6 +9,7 @@ export default function Login() {
   const { currentUser, setCurrentUser, setUserToken } = useStateContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState({ __html: "" });
 
   const navigate = useNavigate();
@@ -17,12 +18,14 @@ export default function Login() {
     ev.preventDefault();
     setError({ __html: "" });
 
+    const request = {
+      email,
+      password,
+      remember_token: rememberMe,
+    };
 
     axiosClient
-      .post("/login", {
-        email,
-        password,
-      })
+      .post("/login", request)
       .then(({ data }) => {
         setCurrentUser(data.user);
         setUserToken(data.token);
@@ -31,17 +34,17 @@ export default function Login() {
             `Hello ${data.user.name}!`,
             `Welcome back ${data.user.user_role}.`,
             'info'
-            )
-            navigate('/management');
-        }else if (data.user.user_role === 'employee' || data.user.user_role === 'driver') {
+          )
+          navigate('/management');
+        } else if (data.user.user_role === 'employee' || data.user.user_role === 'driver') {
           Swal.fire(
             `Hello ${data.user.name}!`,
             `Welcome back ${data.user.user_role}.`,
             'info'
-            )
-            navigate('/workspace');
-        }else if (data.user.user_role === 'customer') {
-            navigate('/app');
+          )
+          navigate('/workspace');
+        } else if (data.user.user_role === 'customer') {
+          navigate('/app');
         }
       })
       .catch((error) => {
@@ -87,7 +90,7 @@ export default function Login() {
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
-                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
+                    <input id="remember" value={rememberMe} aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
                   </div>
                   <div className="ml-3 text-sm">
                     <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>

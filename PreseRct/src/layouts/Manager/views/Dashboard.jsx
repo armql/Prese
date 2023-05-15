@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import StatisticsSummary from '../components/StatisticsSummary';
 import StatisticsCharts from '../components/StatisticsCharts';
 import QuickAdd from '../components/QuickAdd';
-import { Navigate } from 'react-router-dom';
-import { useStateContext } from '../../../contexts/ContextProvider';
+// import { Navigate } from 'react-router-dom';
+// import { useStateContext } from '../../../contexts/ContextProvider';
 
 function Dashboard() {
 

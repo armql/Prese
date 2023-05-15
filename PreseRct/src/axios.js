@@ -14,10 +14,10 @@ axiosClient.interceptors.response.use(response => {
 }, error => {
   if (error.response && error.response.status === 401) {
     localStorage.removeItem('TOKEN')
-    window.location.reload();
-    return error;
+    window.location.replace('/login') // Redirect to login page
+    return Promise.reject(error)
   }
-  throw error;
+  return Promise.reject(error)
 })
 
 export default axiosClient;

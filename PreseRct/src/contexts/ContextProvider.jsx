@@ -19,15 +19,16 @@ export const ContextProvider = ({ children }) => {
                 },
             });
             const data = await response.json();
+            console.log("Data from server:", data);
             setCurrentUser({
                 ...data,
             });
         };
-
+    
         if (userToken) {
             fetchUser();
         }
-    }, [userToken]);
+    }, [userToken]);    
 
     return (
         <StateContext.Provider

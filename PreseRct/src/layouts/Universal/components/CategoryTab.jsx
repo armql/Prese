@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProductData from '../data/ProductData';
-import ProductCard from './OrderCart';
+import ProductCard from './ProductCard';
 
 export default function CategoryTab() {
     const [selectedTab, setSelectedTab] = useState('Burgerswraps');

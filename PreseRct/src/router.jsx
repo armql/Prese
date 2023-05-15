@@ -14,6 +14,7 @@ import CategoryRegister from "./layouts/Manager/components/CategoryRegister";
 import CategoryEdit from "./layouts/Manager/components/CategoryEdit";
 import ProductList from "./layouts/Manager/views/ProductList";
 import ProductRegister from "./layouts/Manager/components/ProductRegister";
+import { useStateContext } from "./contexts/ContextProvider";
 
 const router = createBrowserRouter([
     {
@@ -116,7 +117,7 @@ const router = createBrowserRouter([
                 element: <CategoryRegister />
             },
             {
-                path: 'categorylist/:id/categoryedit',
+                path: 'categorylist/categoryedit/:id/categoryedit',
                 element: <CategoryEdit />
             },
             {

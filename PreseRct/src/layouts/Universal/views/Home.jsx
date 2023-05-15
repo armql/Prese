@@ -5,7 +5,7 @@ import OfferSlider from '../components/OfferSlider'
 
 export default function Home() {
     return (
-        <div className='bg-white backdrop-fsrtgsrtilter backdrop-blur-lg bg-opacity-20'>
+        <div className='bg-white backdrop-filter backdrop-blur-lg bg-opacity-20'>
                 <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                     <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                         <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-red-200 hover:ring-red-400 active:ring-red-600">
