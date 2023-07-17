@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->decimal('market_price', 10, 2);
             $table->decimal('retail_price', 10, 2);
-            $table->string('preview');
+            $table->string('preview', 255)->nullable();
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users');
