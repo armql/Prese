@@ -1,0 +1,286 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,900&display=swap");
+* {
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.parent {
+    display: flex;
+    flex-direction: column;
+}
+.order-p-header h1 {
+    color: black;
+    margin-top: 6.5rem;
+    padding: 0 1rem 1rem 1rem;
+    text-align: center;
+    font-weight: 800;
+}
+.divider {
+    padding: 0 1rem 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    background-color: white;
+}
+.product-p-header,
+.product-p-price,
+.product-p-paragraph {
+    font-family: "Noto Sans", sans-serif;
+    text-align: start;
+    margin-top: 1rem;
+}
+.product-p-paragraph,
+.product-p-price {
+    font-weight: 400;
+    color: #7d748b;
+}
+.product-p-header {
+    margin-bottom: -2rem;
+    font-weight: 600;
+    font-size: larger;
+}
+.product-p-paragraph {
+    margin-top: -1rem;
+    font-size: medium;
+}
+.customer-p-details {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+    color: #7d748b;
+    margin-top: -1rem;
+    text-align: end;
+}
+.customer-p-address {
+    margin-top: 1rem;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 600;
+    font-size: large;
+    text-align: end;
+}
+.product-p-image {
+    width: 100%;
+    height: auto;
+    align-items: center;
+    border-radius: 20px;
+}
+.order-p-tb {
+    border: 1px solid #dee2e6;
+    margin-bottom: 6.5rem;
+    margin-right: 4rem;
+    margin-left: 4rem;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: white;
+}
+underline {
+    text-align: start;
+    text-decoration: underline;
+}
+.reference {
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1.5rem;
+}
+.edit-p-centre {
+    display: flex;
+    justify-content: center;
+}
+.edit-p-bt {
+    border: none;
+    background-color: transparent;
+    font-weight: 800;
+}
+.box-p-edit-bt {
+    display: flex;
+    background-color: transparent;
+    border: 2px solid #adb5bd;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    width: 30%;
+    height: 60px;
+}
+.box-p-edit-bt:hover {
+    cursor: pointer;
+}
+.box-p-edit-bt:active {
+    scale: 101%;
+}
+.box-p-edit-bt:hover {
+    cursor: pointer;
+}
+/* ^PROGRESS dynamic bar*/
+.progress-box {
+    width: 100%;
+    height: auto;
+}
+.progress-bar {
+    margin: 1rem;
+    width: 97%;
+    height: 10px;
+    background-color: #f3f2f7;
+    border-radius: 40px;
+}
+.progress-bar-pending {
+    width: 35.5%;
+    height: 10px;
+    background-color: #e76a56;
+    border-radius: 40px;
+}
+.progress-bar-delivering {
+    width: 64.5%;
+    height: 10px;
+    background-color: #fbbc05;
+    border-radius: 40px;
+}
+.progress-bar-delivered {
+    width: 100%;
+    height: 10px;
+    background-color: #22a45d;
+    border-radius: 40px;
+}
+.progress-bar-cancelled {
+    width: 6%;
+    height: 10px;
+    background-color: #d12c35;
+    border-radius: 40px;
+}
+.progress-text {
+    padding: 0 1rem 1rem 1rem;
+}
+.progress-item-cancelled,
+.progress-item-pending,
+.progress-item-delivering,
+.progress-item-delivered {
+    font-weight: 500;
+    padding: 0 1rem 0.5rem 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+}
+/* ^PROGRESS text-item*/
+.progress-item-cancelled:nth-child(2),
+.progress-item-cancelled:nth-child(3),
+.progress-item-cancelled:nth-child(4) {
+    color: #64748b;
+}
+.progress-item-pending:nth-child(3),
+.progress-item-pending:nth-child(4) {
+    color: #64748b;
+}
+.progress-item-delivering:nth-child(4) {
+    color: #64748b;
+}
+.order-p-image {
+    width: 100%;
+    display: flex;
+    scale: 110%;
+    justify-content: center;
+}
+.order-p-image img {
+    width: 30%;
+    border-radius: 40px;
+}
+.order-p-h-details,
+.order-p-image img {
+    display: flex;
+    text-align: start;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 0.5rem;
+}
+.order-p-hh-details {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1024px) {
+    /* ^PROGRESS dynamic bar*/
+    .progress-box {
+        width: 100%;
+        height: auto;
+    }
+    .progress-bar {
+        margin: 1rem;
+        width: 90%;
+        height: 10px;
+        background-color: #f3f2f7;
+        border-radius: 40px;
+    }
+    .progress-bar-pending {
+        width: 35.5%;
+        height: 10px;
+        background-color: #e76a56;
+        border-radius: 40px;
+    }
+    .progress-bar-delivering {
+        width: 64.5%;
+        height: 10px;
+        background-color: #fbbc05;
+        border-radius: 40px;
+    }
+    .progress-bar-delivered {
+        width: 100%;
+        height: 10px;
+        background-color: #22a45d;
+        border-radius: 40px;
+    }
+    .progress-bar-cancelled {
+        width: 6%;
+        height: 10px;
+        background-color: #d12c35;
+        border-radius: 40px;
+    }
+    .progress-text {
+        font-size: smaller;
+    }
+
+    .progress-item-cancelled,
+    .progress-item-pending,
+    .progress-item-delivering,
+    .progress-item-delivered {
+        font-weight: 500;
+        flex-direction: row;
+        font-size: small;
+        justify-content: space-between;
+        display: flex;
+    }
+    /* ^PROGRESS text-item*/
+    .progress-item-cancelled:nth-child(2),
+    .progress-item-cancelled:nth-child(3),
+    .progress-item-cancelled:nth-child(4) {
+        color: #64748b;
+    }
+    .progress-item-pending:nth-child(3),
+    .progress-item-pending:nth-child(4) {
+        color: #64748b;
+    }
+    .progress-item-delivering:nth-child(4) {
+        color: #64748b;
+    }
+    .order-p-image {
+        width: 100%;
+        display: flex;
+        scale: 110%;
+        justify-content: center;
+    }
+    .order-p-image img {
+        width: 30%;
+        border-radius: 40px;
+    }
+    .order-p-h-details,
+    .order-p-image img {
+        display: flex;
+        text-align: start;
+        flex-direction: column;
+    }
+    .order-p-hh-details {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}
