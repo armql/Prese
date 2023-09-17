@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ProductData from '../../data/ProductData';
 import ProductCard from './ProductDisplayCard_skeleton';
+import ProductData from '../../data/ProductData';
 
 export default function ProductDisplay_skeleton() {
     const [selectedTab, setSelectedTab] = useState('Burgerswraps');

@@ -10,8 +10,6 @@ function Drawer() {
 
   return (
     <>
-    
-      {/* Drawer init button */}
       <div className="fixed z-10 right-0">
         <button
           className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-4 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -27,7 +25,6 @@ function Drawer() {
         </button>
       </div>
 
-      {/* Drawer component */}
       <div
         id="drawer-top-example"
         className={`fixed top-0 left-0 right-0 z-40 w-full p-4 transition-transform ${
@@ -36,7 +33,6 @@ function Drawer() {
         tabIndex="-1"
         aria-labelledby="drawer-top-label"
       >
-        {/* Drawer header */}
         <h5 className="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
           <svg
             className="w-5 h-5 mr-2"
@@ -53,8 +49,6 @@ function Drawer() {
           </svg>
           Your Order
         </h5>
-
-        {/* Close button */}
         <button
           type="button"
           onClick={toggleDrawer}
@@ -77,8 +71,6 @@ function Drawer() {
           </svg>
           <span className="sr-only">Close menu</span>
         </button>
-
-        {/* Drawer content */}
         <Cart />
       </div>
     </>

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosClient from '../../../api/axios';
 import Ordercard from './Ordercard';
 import ProductDisplaySkeleton from '../../Universal/components/core/ProductDisplayTab_skeleton';
-import bg from '../../Universal/images/img111.png'
-import bg2 from '../../Universal/images/img222.png'
+import { Drawer } from 'flowbite';
 export default function CategoryTab() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,9 +19,12 @@ export default function CategoryTab() {
                 console.error('Error fetching categories:', error);
             });
     }, []);
+
     const handleTabClick = (tabName) => {
         setSelectedTab(tabName);
     };
+
+
     if (loading) {
         return <ProductDisplaySkeleton />;
     }
@@ -33,6 +35,7 @@ export default function CategoryTab() {
                 const imageURL = item.preview.replace('GfcRct', '');
                 return (
                     <Ordercard
+                        id={item.id}
                         preview={imageURL}
                         name={item.name}
                         description={item.description}
@@ -49,10 +52,6 @@ export default function CategoryTab() {
     return (
         <div>
             <div className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-100">
-                <div className='flex bg-red-900'>
-                <img src={bg} alt="" className='scale-50' />
-                <img src={bg2} alt="" className='scale-50'/>
-                </div>
                 <ul
                     className="flex flex-wrap -mb-px text-sm font-medium text-center justify-center"
                     id="myTab"
