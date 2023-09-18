@@ -1,4 +1,4 @@
-import {Navigate, createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import GuestLayout from "./layouts/Guest/GuestLayout"
 import CustomerLayout from "./layouts/Customer/CustomerLayout"
 import EmployeeLayout from "./layouts/Employee/EmployeeLayout"
@@ -31,6 +31,7 @@ import DriverLayout from "./layouts/Driver/DriverLayout"
 import OrderTrack from "./layouts/Customer/components/OrderTrack";
 import Checkout from "./layouts/Customer/components/Checkout";
 import DriverDashboard from "./layouts/Driver/views/Dashboard";
+import NotFound from "./layouts/NotFound";
 
 
 const router = createBrowserRouter([
@@ -96,7 +97,7 @@ const router = createBrowserRouter([
                 path: 'checkout',
                 element: <Checkout />
             },
-           
+
         ]
     }, {
         path: '/workspace',
@@ -199,6 +200,10 @@ const router = createBrowserRouter([
                 element: <UserCreate />
             }
         ]
+    },
+    {
+        path: "*",
+        element: <NotFound />
     }
 ])
 

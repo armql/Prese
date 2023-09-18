@@ -1,5 +1,6 @@
 import React from 'react'
-import '../styles/order-progress-style.css'
+// import '../styles/order-progress-style.css'
+
 import OrderTrack from '../components/OrderTrack'
 function OrderInvoice() {
     return (

@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../Universal/views/Navbar'
 import { Outlet } from 'react-router-dom'
 import Footer from '../Universal/views/Footer'
+import Cart from './components/Cart';
 
 export default function CustomerLayout() {
+    const [showModal, setshowModal] = useState(false);
+
+    const toggle = () => {
+        setshowModal(!showModal);
+    };
     return (
         <div className="relative">
             <div
@@ -17,7 +23,9 @@ export default function CustomerLayout() {
             />
             <div className="relative z-10">
                 <Navbar />
+                <div className='h-36 bg-white'></div>
                 <Outlet />
+                <Cart showModal={showModal} toggle={toggle} />
                 <Footer />
             </div>
         </div>

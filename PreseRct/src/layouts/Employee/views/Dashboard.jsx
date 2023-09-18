@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import SideBar from "../components/Sidebar";
-import DashboardView from "../components/DashboardView";
-import DashboardMain from "../components/DashboardMain";
+import React from 'react';
+import { useStateContext } from '../../../contexts/ContextProvider';
+import { Chart } from 'chart.js';
+import Charts from '../components/Charts';
 
 export default function EmployeeDashboard() {
+    const { currentUser } = useStateContext();
+
     return (
-        <div className="flex ">
-            <title>GFC | Dashboard</title>
-            <div className="basis-[12%] h-[100%] ">
-                <SideBar />
+        <div className="bg-white backdrop-blur-lg bg-opacity-60 h-screen">
+            <title>Prese | Dashboard</title>
+            <div className='bg-white shadow-sm p-4 text-2xl'>
+                CE - {currentUser.name}
             </div>
-            <div className="basis-[88%] border">
-                <DashboardView />
-                <DashboardMain />
-            </div>
-            <div></div>
+            <Charts />
         </div>
     );
 }

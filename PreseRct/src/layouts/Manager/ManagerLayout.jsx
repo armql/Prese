@@ -18,6 +18,7 @@ export default function ManagerLayout() {
       />
       <div className="relative z-10">
         <Navbar />
+        <div className='h-24 bg-white'></div>
         <Outlet />
         <Footer />
       </div>

@@ -127,9 +127,6 @@ export default function Login() {
                 Don't have an account yet?{" "}
                 <Link to="/signup" className="text-red-500 hover:text-red-700 underline hover:cursor-wait" >Sign up</Link>
               </p>
-              <p className="text-gray-500 text-center">
-                -- -- -- -- -- -- -- or -- -- -- -- -- -- --
-              </p>
               <button disabled type="button" className="btn btnGuest w-full mt-2 p-2 rounded hover:cursor-wait">
                 CONTINUE AS GUEST
               </button>
@@ -147,7 +144,7 @@ export default function Login() {
   return (
     <div className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-20">
       <div className="flex items-center justify-center p-4">
-        <title>GFC | Login</title>
+        <title>Prese | Login</title>
 
         <div className="signup m-10">
           <h2 className="mb-3 text-center font-bold text-xl">Login</h2>
@@ -215,9 +212,7 @@ export default function Login() {
               Don't have an account yet?{" "}
               <Link to="/signup" className="text-red-500 hover:text-red-700 underline focus:cursor-wait" >Sign up</Link>
             </p>
-            <p className="text-gray-500 text-center">
-              -- -- -- -- -- -- -- or -- -- -- -- -- -- --
-            </p>
+            
             <Link type="button" to='../' className="btn text-center btnGuest w-full mt-2 p-2 rounded focus:cursor-wait">
               CONTINUE AS GUEST
             </Link>

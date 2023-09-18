@@ -72,7 +72,7 @@ class OrderController extends Controller
         $orderBy = $request->input('orderBy', 'latest');
         $status = $request->input('status', 'pending');
 
-        $query = Order::with('user','orderItems.product', 'orderItems');
+        $query = Order::with('user', 'orderItems.product', 'orderItems');
 
         if ($userId) {
             $query->whereHas('user', function ($q) use ($userId) {
@@ -105,20 +105,20 @@ class OrderController extends Controller
                 $driver = DB::table('users')->select('name')->where('id', $order->driver_id)->first();
                 $order->driver_name = $driver ? $driver->name : 'Unknown driver';
             }
-        
+
             if (!$order->employee_id) {
                 $order->employee_name = 'No employee assigned';
             } else {
                 $employee = DB::table('users')->select('name')->where('id', $order->employee_id)->first();
                 $order->employee_name = $employee ? $employee->name : 'Unknown employee';
             }
-        
+
             unset($order->driver_id);
             unset($order->employee_id);
-        
+
             return $order;
         });
-        
+
 
         return response()->json([
             'orders' => $orders->items(),
@@ -314,6 +314,41 @@ class OrderController extends Controller
 
         return response()->json(['count' => $count]);
     }
+
+    public function createOrderWithItems(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $orderItems = $request->input('order_items');
+
+        DB::beginTransaction();
+
+        try {
+            $order = new Order();
+            $order->user_id = $userId;
+            $order->status = 'pending';
+            $order->save();
+
+            foreach ($orderItems as $item) {
+                $productId = $item['product_id'];
+                $quantity = $item['quantity'];
+
+                $orderItem = new OrderItem();
+                $orderItem->order_id = $order->id;
+                $orderItem->product_id = $productId;
+                $orderItem->quantity = $quantity;
+                $orderItem->save();
+            }
+
+            DB::commit();
+
+            return response()->json(['order' => $order]);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json(['error' => 'Failed to create order with items.'], 500);
+        }
+    }
+
 
     // public function calculateOrderTotals()
     // {

@@ -64,7 +64,7 @@ Route::get('ordertrack/{id}', [OrderController::class, 'ordertrack']);
 Route::get('/orders/latest', [OrderController::class, 'getLatestOrder']);
 Route::get('/orders/deliveredcount', [OrderController::class, 'count']);
 Route::get('orders/calculate-totals', [OrderController::class, 'calculateOrderTotals']);
-
+Route::post('checkout', [OrderController::class, 'createOrderWithItems']);
 
 Route::get('user', [UserController::class, 'index']);
 Route::post('user', [UserController::class, 'create']);

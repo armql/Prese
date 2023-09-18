@@ -1,104 +1,265 @@
-import React from "react";
-import { useCart } from "react-use-cart"
+import React, { useContext, useEffect, useState } from 'react';
+import { CartContext } from '../../../contexts/CartContext';
+import { useStateContext } from '../../../contexts/ContextProvider';
+import { Link, useNavigate } from 'react-router-dom';
+import axiosClient from '../../../api/axios';
 
-export default function Cart() {
-    const {
-        isEmpty,
-        totalUniqueItems,
-        items,
-        totalItems,
-        cartTotal,
-        updateItemQuantity,
-        removeItem,
-        emptyCart,
-    } = useCart();
+function Cart() {
+    const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } = useContext(CartContext);
+    const [modalVisible, setModalVisible] = useState(false);
+    const { currentUser, setCurrentUser, userToken } = useStateContext();
 
-    if (isEmpty) return <h1>Your Cart is empty</h1>
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!userToken) {
+            navigate('../../');
+            return;
+        }
+
+        axiosClient
+            .get('/me')
+            .then(({ data }) => {
+                setCurrentUser(data);
+
+            })
+            .catch(() => {
+            });
+    }, [navigate, setCurrentUser]);
+
+    const buttonCheckoutClick = () => {
+        navigate('checkout');
+        setModalVisible(false);
+    }
+
+    const closeModal = () => {
+        setModalVisible(false);
+    };
+
+    const openModal = () => {
+        setModalVisible(true);
+    }
+
+    const calculateQTTotal = (price, quantity) => {
+        const finalPrice = price * quantity;
+
+        return finalPrice;
+    }
+
+    let convertImageURL = (items) => {
+        const imageURL = items.replace('../GfcRct', '');
+        return imageURL;
+    };
+
     return (
-        <div>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                <span class="sr-only">Image</span>
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Product
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Qty
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Price
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {items.map((item, index) => {
-                            return (
-                                <tr key={index} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td class="w-32 p-4">
-                                        <img src={item.img} style={{ height: '6rem' }} />
-                                    </td>
-                                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                                        {item.title}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center space-x-3">
-                                            <button class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                                                <span class="sr-only"> onClick={() => updateItemQuantity(item.id, item.quantity - 1)}</span>
-                                                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+        <div className=''>
+            <title>Prese | Checking out</title>
+            {
+                cartItems.length > 0 ? (
+                    <>
+
+                        <div className=" flex items-center justify-center" onClick={openModal}>
+                            <div className="fixed bottom-0 z-40 bg-red-700 text-white text-4xl px-4 py-3 hover:py-5 hover:px-5 cursor-pointer transition-all duration-100 rounded-t-full font-semibold">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-9 h-9">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    <div
+                        className="hidden fixed right-10 top-40 text-lg bg-red-100 text-red-800 p-1 rounded-sm font-semibold"></div>
+                )
+            }
+            {modalVisible && (
+                <div
+                    id="drawer-swipe"
+                    className="fixed z-40 w-full bg-white border-t-2 border-gray-300 transition-transform top-96 left-0 right-0 bottom-0 overflow-y-auto"
+                    tabIndex="-1"
+                    aria-labelledby="drawer-swipe-label"
+                >
+                    <div className="flex justify-between px-4 py-3">
+                        <h5
+                            onClick={closeModal}
+                            className="text-sm font-semibold text-gray-600 cursor-pointer "
+                        >
+                            Close
+                        </h5>
+                        <h5 className="text-sm font-semibold text-gray-600 ">
+                            Order Details
+                        </h5>
+                        <h5 className="text-sm font-semibold text-gray-600 ">
+                            &nbsp;
+                        </h5>
+                    </div>
+                    <div
+
+                    >
+                        <div className="px-4 py-6 grid gap-2 sm:grid-cols-1 md-grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+                            {cartItems.map((item) => (
+                                <div key={item.id} className="grid grid-cols-2 border-2 p-4">
+                                    <div className="grid grid-cols-1">
+                                        <img
+                                            src={convertImageURL(item.preview)}
+                                            alt="food icon"
+                                            className="w-24 h-24 mx-auto rounded-md"
+                                        />
+                                        <h5 className="text-xl font-bold text-gray-800 text-center">
+                                            {item.name}
+                                        </h5>
+                                        <p className="text-sm text-gray-500  text-center">
+                                            {item.description}
+                                        </p>
+                                    </div>
+                                    <div className="grid grid-cols-1 gap-6">
+                                        <div className="grid grid-cols-2 items-center justify-between">
+                                            <h5 className="text-sm font-bold text-gray-800">
+                                                Quantity
+                                            </h5>
+                                            <p className=" text-end text-gray-500">
+                                                {item.quantity}
+                                            </p>
+                                        </div>
+                                        <div className="grid grid-cols-2 items-center">
+                                            <h5 className="text-sm font-bold text-gray-800">
+                                                Price per pc.
+                                            </h5>
+                                            <p className="mt-1 text-sm text-end text-gray-500 ">
+                                                {item.retail_price}EUR
+                                            </p>
+                                            {item.quantity > 1 && (
+                                                <>
+                                                    <h5 key={item.id} className="text-sm font-bold text-gray-800">
+                                                        Price per qt.
+                                                    </h5>
+                                                    <p className="mt-1 text-sm text-end text-gray-500 ">
+                                                        {calculateQTTotal(item.price, item.quantity).toFixed(2)}EUR
+                                                    </p>
+                                                </>
+                                            )}
+                                        </div>
+                                        <div className='flex flex-row justify-around text-center items-center'>
+                                            <button
+                                                onClick={() => {
+                                                    addToCart(item)
+                                                }}
+                                                className='bg-green-100 hover:bg-green-200 active:scale-105 transition text-green-800 p-4'>
+                                                <div className='flex justify-center items-center gap'>
+                                                    {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                                                            <path fillRule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
+                                                        </svg> */}
+                                                    Add
+                                                </div>
                                             </button>
-                                            <div>
-                                                <input type="number" id="first_product" class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={item.quantity} required />
-                                            </div>
-                                            <button onClick={() => updateItemQuantity(item.id, item.quantity + 1)} class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                                                <span class="sr-only"></span>
-                                                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+
+                                            <button
+                                                onClick={() => {
+                                                    removeFromCart(item)
+                                                }}
+                                                className='bg-rose-100 text-rose-800 hover:bg-rose-200 active:scale-105 transition p-4'>
+                                                <div className='flex justify-center items-center gap'>
+                                                    {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                                                            <path fillRule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+                                                        </svg> */}
+                                                    Remove
+                                                </div>
                                             </button>
                                         </div>
-                                    </td>
+                                    </div>
+                                </div>
+                            ))}
+                            {
+                                cartItems.length > 0 ? (
+                                    <>
 
-                                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                                        {item.retail_price}
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </div>
-            <div class="bg-gray-200">
-                <div>
-                    <button className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                        <div className="col-atuo ms-auto">
-                            <h2>Total Price: ${cartTotal}</h2>
+                                        <div className="flex justify-between w-full h-60 border-2 border-red-400 p-4 bg-red-300">
+                                            <div className="grid grid-cols-1 items-center">
+                                                <div className="flex flex-col justify-center text-xl font-bold text-rose-950 text-center">
+                                                    <div className='text-2xl pb-1'>
+                                                        Total of order
+                                                    </div>
+                                                    <div className='flex flex-col'>
+
+                                                        {cartItems.map((item) => (
+
+                                                            <div key={item.id} className='text-start text-rose-900 font-normal text-sm'>
+                                                                {item.quantity}X {item.name}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div className="grid grid-cols-1">
+                                                <div className="flex flex-col items-end">
+                                                    <h5 className="text-sm font-bold text-red-950">
+                                                        Ordered by
+                                                    </h5>
+                                                    <p className="mt-1 text-sm text-rose-800 ">
+                                                        {currentUser.name}
+                                                    </p>
+                                                </div>
+                                                <div className="flex flex-col items-end">
+                                                    <h5 className="text-sm font-bold text-red-950">
+                                                        City
+                                                    </h5>
+                                                    <p className="mt-1 text-sm text-rose-800  ">
+                                                        {currentUser.city}
+                                                    </p>
+                                                </div>
+                                                <div className="flex flex-col items-end">
+                                                    <h5 className="text-sm font-bold text-red-950">
+                                                        Address
+                                                    </h5>
+                                                    <p className="text-sm text-rose-800 ">
+                                                        {currentUser.address}
+                                                    </p>
+                                                </div>
+                                                <div className="flex flex-col justify-center items-end">
+                                                    <h5 className="text-sm font-bold text-red-950">
+                                                        Total
+                                                    </h5>
+                                                    <p className="mt-1 text-sm text-rose-800 ">
+                                                        {getCartTotal().toFixed(2)}EUR
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='grid items-center h-40'>
+                                            <div className='flex justify-around text-2xl'>
+                                                <button
+                                                    onClick={() => {
+                                                        clearCart()
+                                                    }}
+                                                    className='text-xl bg-red-200 text-red-800 p-4 rounded-sm hover:bg-red-300 active:scale-105 transition'>
+                                                    Clear Cart
+                                                </button>
+                                                <button
+                                                    onClick={buttonCheckoutClick}
+                                                    className='text-xl bg-gray-200 text-gray-800 p-4 rounded-sm font-semibold hover:bg-emerald-300 transition active:scale-105 hover:text-emerald-900 '>
+                                                    <div className='flex items-center justify-center gap-10'>
+                                                        Checkout
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div
+                                        className="flex items-top justify-center text-2xl font-semibold w-screen h-24">Your cart is empty 🍴</div>
+                                )
+                            }
                         </div>
-                    </button>
+                    </div>
                 </div>
-                <a className="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"></a>
 
-
-                <div className="col-atuo">
-                    <button type="button" onClick={() => emptyCart()} class="text-white bg-red-700 hover:bg-red-800  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                        </svg>
-
-                        Clear Cart
-                    </button>
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg aria-hidden="true" class="w-6 h-6 dark:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>
-                        Buy now
-                    </button>
-                </div>
-            </div>
+            )}
         </div>
 
-
-    )
+    );
 }
+
+export default Cart;

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
     return (
-        <footer className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-80">
+        <footer className="bg-white">
             <div className="mx-auto w-full max-w-screen-xl">
                 <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
                     <div>
@@ -16,6 +16,9 @@ export default function Footer() {
                             </li>
                             <li className="mb-4">
                                 <a href="/ourlocations" className="hover:underline">Our Locations</a>
+                            </li>
+                            <li className="mb-4">
+                                <a href="/myorders" className="hover:underline">My Orders</a>
                             </li>
                         </ul>
                     </div>
@@ -37,23 +40,6 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div>
-                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Download</h2>
-                        <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                            <li className="mb-4">
-                                <a href="#" className="hover:underline">iOS</a>
-                            </li>
-                            <li className="mb-4">
-                                <a href="#" className="hover:underline">Android</a>
-                            </li>
-                            <li className="mb-4">
-                                <a href="#" className="hover:underline">Windows</a>
-                            </li>
-                            <li className="mb-4">
-                                <a href="#" className="hover:underline">MacOS</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
                         <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Contact us</h2>
                         <ul className="text-gray-500 dark:text-gray-400 font-medium">
                         <li className="mb-4">
@@ -68,7 +54,9 @@ export default function Footer() {
                            
                         </ul>
                     </div>
-                    
+                    <div className='text-6xl flex flex-col items-center justify-center font-bold'>
+                            Prese
+                    </div>
                 </div>
                 <div className="bg-transparent px-4 py-6 md:flex md:items-center md:justify-between">
                     <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2023 <a href="https://flowbite.com/">GFC™</a>. All Rights Reserved.

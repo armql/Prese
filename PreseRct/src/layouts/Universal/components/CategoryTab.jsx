@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axiosClient from '../../../api/axios';
 import ProductCard from './ProductCard';
 import ProductDisplaySkeleton from './core/ProductDisplayTab_skeleton';
+
 export default function CategoryTab() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedTab, setSelectedTab] = useState('');
+
     useEffect(() => {
         axiosClient
             .get('category')
@@ -18,9 +20,11 @@ export default function CategoryTab() {
                 console.error('Error fetching categories:', error);
             });
     }, []);
+
     const handleTabClick = (tabName) => {
         setSelectedTab(tabName);
     };
+
     if (loading) {
         return <ProductDisplaySkeleton />;
     }

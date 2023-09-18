@@ -5,7 +5,7 @@ import ProductDisplaySkeleton from '../../components/core/ProductDisplayTab_skel
 export default function HomeValidation_skeleton() {
     return (
         <div className='bg-white backdrop-filter backdrop-blur-lg bg-opacity-20'>
-            <title>GFC | Authenticating</title>
+            <title>Prese | Authenticating</title>
             <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                 <div className="hidden sm:mb-8 sm:flex animate-pulse sm:justify-center">
                     <div className="relative h-6 w-80 rounded-full bg-red-100 px-3 py-1 text-sm leading-6 text-gray-600 ring-2 ring-red-50 hover:ring-red-400 ">
