@@ -48,24 +48,16 @@ export default function Checkout() {
     setOrderPayment(!orderPayment);
   };
 
-  const handlePhoneInputChange = (e) => {
-    const inputPhoneNumber = e.target.value.trim();
-    const numericInput = inputPhoneNumber.replace(/\D/g, '');
-    const kosovoPhoneNumberPattern = /^(044|045)(?:\s\d{3}\s\d{3})?$/;
+  const handlePhoneInput = (e) => {
+    const inputText = e.target.value;
+    setPhoneNumber(inputText);
 
-    const formattedPhoneNumber = numericInput
-      .replace(/(\d{3})(?=\d)/g, '$1 ')
-      .trim();
+    const pattern = /^(044|045)\s?\d+$/;
 
-    if (formattedPhoneNumber.length <= 12 && kosovoPhoneNumberPattern.test(formattedPhoneNumber)) {
-      setNumberCheck(true);
-      setPhoneNumber(formattedPhoneNumber);
+    if (pattern.test(inputText)) {
       setPhoneNumberError('');
     } else {
-      setNumberCheck(false);
-      setPhoneNumber(formattedPhoneNumber);
-      console.log(formattedPhoneNumber)
-      setPhoneNumberError('Invalid number format, number must be from RKO');
+      setPhoneNumberError('Please enter a valid RKS phone number prefix ex. 044 265 455 or 045 551 441.');
     }
   };
 
@@ -217,8 +209,9 @@ export default function Checkout() {
                     id="phone"
                     className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                     placeholder='Ex. 044 449 944'
-                    maxLength="11"
-                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    maxLength="9"
+                    value={phoneNumber}
+                    onChange={handlePhoneInput}
                   />
                   {phoneNumberError && (
                     <p className="mt-2 text-sm text-red-600">{phoneNumberError}</p>

@@ -182,11 +182,11 @@ export default function OrderHistoryTable() {
     if (loadingModal) {
         return (
             <div className="relative overflow-x-auto">
-                <div className='grid gap-2 bg-white rounded-md backdrop-filter backdrop-blur-lg bg-opacity-40'>
+                <div className='grid gap-2 bg-white'>
                     <div className='py-6 px-4 grid sm:grid-cols-1 md-grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
                         {
                             orders.map((order) => (
-                                <div key={order.id} className="shadow-sm bg-white rounded-md p-5">
+                                <div key={order.id} className="shadow-sm bg-white border border-red-100 rounded-sm p-5">
                                     <div className="orders-detail">
                                         <div className="grid gap-5 grid-cols-1">
                                             <div className="grid grid-cols-2 justify-between">
@@ -234,10 +234,10 @@ export default function OrderHistoryTable() {
 
     return (
         <div className="relative overflow-auto">
-            <div className='grid bg-white rounded-md backdrop-filter backdrop-blur-lg bg-opacity-40'>
+            <div className='grid bg-transparent bg-white '>
                 <div className='py-6 px-4 grid sm:grid-cols-2 md-grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>{
                     orders.map((order) => (
-                        <div key={order.id} className="bg-white rounded-md shadow-sm p-5">
+                        <div key={order.id} className="bg-white rounded-sm border-2 border-red-100 shadow-sm p-5">
                             <div className="orders-detail">
                                 <div className="grid gap-5 grid-cols-1">
                                     <div className="grid grid-cols-2 justify-between">

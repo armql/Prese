@@ -65,12 +65,12 @@ export default function UserCreate() {
 
   if (submitting) {
     return (
-      <div><title>GFC | Category Edit</title>
+      <div><title>Prese | User Create</title>
       <section className="bg-white p-40 backdrop-filter backdrop-blur-lg bg-opacity-20">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 opacity-80">
-          <a href="#" className="flex items-center mb-6 text-4xl font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center mb-6 text-4xl font-semibold text-gray-900 dark:text-white">
             Administrator Tools
-          </a>
+          </div>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -200,11 +200,11 @@ export default function UserCreate() {
   }
 
   return (
-    <div><title>GFC | User Register</title><section className="bg-white p-40 backdrop-filter backdrop-blur-lg bg-opacity-20">
+    <div><title>Prese | User Register</title><section className="bg-white p-40 backdrop-filter backdrop-blur-lg bg-opacity-20">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a href="#" className="flex items-center mb-6 text-4xl font-semibold text-gray-900 dark:text-white">
+        <div className="flex items-center mb-6 text-4xl font-semibold text-gray-900 dark:text-white">
           Administrator Tools
-        </a>
+        </div>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
