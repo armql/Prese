@@ -277,7 +277,7 @@ export default function ManageOrderTable() {
     return (
         <div className='parent'>
             {showAlert && (
-                <div id="alert-border-2" className="flex fixed z-40 justify-top transition-transform bottom-100 top-1 left-100 right-1 shadow-md w-max p-4 mb-4 text-red-800 border-b-4 border-red-400 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
+                <div id="alert-border-2" className="flex fixed z-40 justify-top transition-transform bottom-100 top-1 left-100 right-1 shadow-md w-max p-4 mb-4 text-red-800 border-b-4 border-red-400 bg-red-50" role="alert">
                     <svg className="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path>
                     </svg>
@@ -286,7 +286,7 @@ export default function ManageOrderTable() {
                     </div>
                     <button
                         type="button"
-                        className="ml-1 -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                        className="ml-1 -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8"
                         data-dismiss-target="#alert-border-2"
                         aria-label="Close"
                         onClick={() => setShowAlert(false)}
@@ -306,7 +306,7 @@ export default function ManageOrderTable() {
                 <div
                     className="bg-white rounded-md shadow-xl backdrop-filter backdrop-blur-lg bg-opacity-95"
                 >
-                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <table className="w-full text-sm text-left text-gray-500 ">
                         <thead className="text-xs border-gray-150 uppercase bg-white">
                             <tr className='bg-white'>
                                 <th scope="col" className="p-4">
@@ -340,7 +340,7 @@ export default function ManageOrderTable() {
                                         <td>
                                             {getStatusTableColor(order.status)}
                                         </td>
-                                        <td scope="row" className="flex items-center justify-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td scope="row" className="flex items-center justify-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                             <div class="text-center">
                                                 <button
                                                     onClick={() => openModal(order.id)}
@@ -401,7 +401,7 @@ export default function ManageOrderTable() {
                                             <button
                                                 onClick={() => handleChanges(order.id)}
                                                 type='submit'
-                                                className="font-medium bg-gray-50 p-3 rounded-md hover:bg-gray-200 text-gray-500 dark:text-red-500">Modify</button>
+                                                className="font-medium bg-gray-50 p-3 rounded-md hover:bg-gray-200 text-gray-500">Modify</button>
                                         </td>
                                     </tr>
                                 ))
@@ -416,21 +416,21 @@ export default function ManageOrderTable() {
                 {modalVisible && (
                     <div
                         id="drawer-swipe"
-                        className="fixed z-40 w-full overflow-y-auto max-h-screen bg-white border-t-2 border-gray-300 dark:border-gray-700 transition-transform bottom-0 top-90 left-0 right-0"
+                        className="fixed z-40 w-full overflow-y-auto max-h-screen bg-white border-t-2 border-gray-300 transition-transform bottom-0 top-90 left-0 right-0"
                         tabIndex="-1"
                         aria-labelledby="drawer-swipe-label"
                     >
                         <div className="flex justify-between px-4 py-3">
                             <h5
                                 onClick={closeModal}
-                                className="text-sm font-semibold text-gray-600 cursor-pointer dark:text-gray-400"
+                                className="text-sm font-semibold text-gray-600 cursor-pointer"
                             >
                                 Close
                             </h5>
-                            <h5 className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+                            <h5 className="text-sm font-semibold text-gray-600">
                                 Order Details
                             </h5>
-                            <h5 className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+                            <h5 className="text-sm font-semibold text-gray-600">
                                 &nbsp;
                             </h5>
                         </div>
@@ -446,27 +446,27 @@ export default function ManageOrderTable() {
                                                 alt="food icon"
                                                 className="w-24 h-24 mx-auto rounded-md"
                                             />
-                                            <h5 className="text-xl font-bold text-gray-800 dark:text-white text-center">
+                                            <h5 className="text-xl font-bold text-gray-800 text-center">
                                                 {item.product.name}
                                             </h5>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+                                            <p className="text-sm text-gray-500 text-center">
                                                 {item.product.description}
                                             </p>
                                         </div>
                                         <div className="grid grid-cols-1 gap-6 border-y-2 border-r-2 p-4">
                                             <div className="grid grid-cols-2 items-center">
-                                                <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                <h5 className="text-sm font-bold text-gray-800">
                                                     Quantity
                                                 </h5>
-                                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                <p className="mt-1 text-sm text-gray-500">
                                                     {item.quantity}
                                                 </p>
                                             </div>
                                             <div className="grid grid-cols-2 items-center">
-                                                <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                <h5 className="text-sm font-bold text-gray-800">
                                                     Price
                                                 </h5>
-                                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                <p className="mt-1 text-sm text-gray-500">
                                                     {item.product.retail_price}EUR
                                                 </p>
                                             </div>
@@ -480,7 +480,7 @@ export default function ManageOrderTable() {
                                     .map((item) => (
                                         <div key={item.id} className="grid grid-cols-2">
                                             <div className="grid grid-cols-1 border-y-2 gap-2 p-4 border-l-2 items-center">
-                                                <h5 className="text-xl font-bold text-gray-800 dark:text-white text-center">
+                                                <h5 className="text-xl font-bold text-gray-800 text-center">
                                                     Total of order
                                                 </h5>
                                                 <h3 className="font-bold text-gray-700">Comment / Request</h3>
@@ -490,34 +490,34 @@ export default function ManageOrderTable() {
                                             </div>
                                             <div className="grid grid-cols-1 gap-6 border-y-2 border-r-2 p-4">
                                                 <div className="grid grid-cols-2 items-center">
-                                                    <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                    <h5 className="text-sm font-bold text-gray-800">
                                                         Order ID
                                                     </h5>
-                                                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                    <p className="mt-1 text-sm text-gray-500">
                                                         #{item.id}
                                                     </p>
                                                 </div>
                                                 <div className="grid grid-cols-2 items-center">
-                                                    <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                    <h5 className="text-sm font-bold text-gray-800">
                                                         City
                                                     </h5>
-                                                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                                    <p className="mt-1 text-sm text-gray-500 whitespace-nowrap">
                                                         {item.user.city}
                                                     </p>
                                                 </div>
                                                 <div className="grid grid-cols-2 items-center">
-                                                    <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                    <h5 className="text-sm font-bold text-gray-800">
                                                         Address
                                                     </h5>
-                                                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                    <p className="mt-1 text-sm text-gray-500">
                                                         {item.user.address}
                                                     </p>
                                                 </div>
                                                 <div className="grid grid-cols-2 items-center">
-                                                    <h5 className="text-sm font-bold text-gray-800 dark:text-white">
+                                                    <h5 className="text-sm font-bold text-gray-800">
                                                         Total
                                                     </h5>
-                                                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                    <p className="mt-1 text-sm text-gray-500">
                                                         {calculateTotal(selectedOrderItems)}EUR
                                                     </p>
                                                 </div>

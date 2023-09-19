@@ -27,7 +27,7 @@ export default function OrderHistoryTable() {
         setCurrentPage(page);
 
         axiosClient
-            .get(`/ofrders?page=${page}&perPage=${ordersPerPage}&user_id=${currentUser.id}`)
+            .get(`/customerOrder?page=${page}&perPage=${ordersPerPage}&user_id=${currentUser.id}`)
             .then(response => {
                 setOrders(response.data.orders);
                 const totalOrders = response.data.total;
@@ -43,7 +43,7 @@ export default function OrderHistoryTable() {
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
         axiosClient
-            .get(`/ofrders?page=${pageNumber}&perPage=${ordersPerPage}`)
+            .get(`/customerOrder?page=${pageNumber}&perPage=${ordersPerPage}`)
             .then(response => {
                 setOrders(response.data.current_page);
                 setLoading(false);
@@ -182,11 +182,11 @@ export default function OrderHistoryTable() {
     if (loadingModal) {
         return (
             <div className="relative overflow-x-auto">
-                <div className='grid gap-2 bg-white rounded-md shadow-xl backdrop-filter backdrop-blur-lg bg-opacity-40'>
-                    <div className='m-10 grid sm:grid-cols-1 md-grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2'>
+                <div className='grid gap-2 bg-white rounded-md backdrop-filter backdrop-blur-lg bg-opacity-40'>
+                    <div className='py-6 px-4 grid sm:grid-cols-1 md-grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
                         {
                             orders.map((order) => (
-                                <div key={order.id} className="bg-white rounded-md shadow-xl backdrop-filter p-5 backdrop-blur-lg bg-opacity-95">
+                                <div key={order.id} className="shadow-sm bg-white rounded-md p-5">
                                     <div className="orders-detail">
                                         <div className="grid gap-5 grid-cols-1">
                                             <div className="grid grid-cols-2 justify-between">
@@ -234,46 +234,42 @@ export default function OrderHistoryTable() {
 
     return (
         <div className="relative overflow-auto">
-            <div className='grid bg-white rounded-md shadow-xl backdrop-filter backdrop-blur-lg bg-opacity-40'>
-                <div className='m-10 grid sm:grid-cols-2 md-grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2'>
-                    {orders && orders.length > 0 ? (
-                        orders.map((order) => (
-                            <div key={order.id} className="bg-white rounded-md shadow-xl backdrop-filter p-5 backdrop-blur-lg bg-opacity-95">
-                                <div className="orders-detail">
-                                    <div className="grid gap-5 grid-cols-1">
-                                        <div className="grid grid-cols-2 justify-between">
-                                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-1">
-                                                <p className="text-l font-bold text-gray-700">Order ID</p>
-                                                <p className="text-l font-bold text-gray-700">Date of Placement</p>
-                                                <p className="text-l font-bold text-gray-700">Order Total</p>
-                                            </div>
-
-                                            <div className="grid grid-cols-1 gap-2 mt-2">
-                                                <p className="text-xs font-bold text-gray-500">#{order.id}</p>
-                                                <p className="text-xs font-bold text-gray-500">{new Date(order.created_at).toLocaleString()}</p>
-                                                <p className="text-xs font-bold text-gray-500">{calculateTotal(order)}EUR</p>
-                                            </div>
+            <div className='grid bg-white rounded-md backdrop-filter backdrop-blur-lg bg-opacity-40'>
+                <div className='py-6 px-4 grid sm:grid-cols-2 md-grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>{
+                    orders.map((order) => (
+                        <div key={order.id} className="bg-white rounded-md shadow-sm p-5">
+                            <div className="orders-detail">
+                                <div className="grid gap-5 grid-cols-1">
+                                    <div className="grid grid-cols-2 justify-between">
+                                        <div className="grid grid-cols-1 gap-2 sm:grid-cols-1">
+                                            <p className="text-l font-bold text-gray-700">Order ID</p>
+                                            <p className="text-l font-bold text-gray-700">Date of Placement</p>
+                                            <p className="text-l font-bold text-gray-700">Order Total</p>
                                         </div>
-                                        <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-5 items-center justify-center">
-                                            <div>{getStatusText(order.status)}</div>
 
-                                            <div className='flex items-center justify-center'>
-                                                <button
-                                                    onClick={() => openModal(order.id)}
-                                                    type="button"
-                                                    className=" focus:outline-none h-10 bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-sm text-sm px-2 py-1"
-                                                >
-                                                    View Order
-                                                </button>
-                                            </div>
+                                        <div className="grid grid-cols-1 gap-2 mt-2">
+                                            <p className="text-xs font-bold text-gray-500">#{order.id}</p>
+                                            <p className="text-xs font-bold text-gray-500">{new Date(order.created_at).toLocaleString()}</p>
+                                            <p className="text-xs font-bold text-gray-500">{calculateTotal(order)}EUR</p>
+                                        </div>
+                                    </div>
+                                    <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-5 items-center justify-center">
+                                        <div>{getStatusText(order.status)}</div>
+
+                                        <div className='flex items-center justify-center'>
+                                            <button
+                                                onClick={() => openModal(order.id)}
+                                                type="button"
+                                                className=" focus:outline-none h-10 bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-sm text-sm px-2 py-1"
+                                            >
+                                                View Order
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            </div >
-                        ))
-                    ) : (
-                        <div colSpan={7} className='flex justify-center items-center font-bold text-center'>Hello {`${currentUser.name}`}, You haven't made an order yet.</div>
-                    )}
+                            </div>
+                        </div >
+                    ))}
                 </div>
             </div>
 

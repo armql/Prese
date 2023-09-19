@@ -169,7 +169,8 @@ class OrderController extends Controller
         $userId = $request->input('user_id');
 
         $query = Order::with('user', 'orderItems.product', 'orderItems')
-            ->where('user_id', $userId);
+            ->where('user_id', $userId)
+            ->orderBy('created_at', 'desc');
 
         $orders = $query->paginate($perPage);
 
@@ -183,6 +184,7 @@ class OrderController extends Controller
             'last_page' => $orders->lastPage(),
         ]);
     }
+
 
     public function editOrder(Request $request, $orderId)
     {

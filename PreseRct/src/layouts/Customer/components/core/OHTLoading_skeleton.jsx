@@ -52,7 +52,7 @@ export default function OHTLoading_skeleton() {
                 );
             case 'pending':
                 return (
-                    <div className="flex items-center justify-center bg-yellow-200 rounded-full p-1 px-5 mr-2 mb-2 text-yellow-700">
+                    <div className="flex items-center animate-pulse justify-center bg-gray-200 rounded-full p-1 px-5 mr-2 mb-2 text-gray-700">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -83,15 +83,15 @@ export default function OHTLoading_skeleton() {
                             <div className="grid gap-5 grid-cols-1">
                                 <div className="grid grid-cols-2 justify-between">
                                     <div className="grid grid-cols-1 gap-2 sm:grid-cols-1">
-                                        <p className="text-l font-bold text-gray-700"><div class="h-2.5 bg-gray-400 rounded-full dark:bg-gray-700 w-20"></div></p>
-                                        <p className="text-l font-bold text-gray-700"><div class="h-2.5 bg-gray-400 rounded-full dark:bg-gray-700 w-40"></div></p>
-                                        <p className="text-l font-bold text-gray-700"><div class="h-2.5 bg-gray-400 rounded-full dark:bg-gray-700 w-20"></div></p>
+                                        <p className="text-l font-bold text-gray-500"><div class="h-2.5 bg-gray-400 rounded-full w-20"></div></p>
+                                        <p className="text-l font-bold text-gray-500"><div class="h-2.5 bg-gray-400 rounded-full w-40"></div></p>
+                                        <p className="text-l font-bold text-gray-500"><div class="h-2.5 bg-gray-400 rounded-full w-20"></div></p>
                                     </div>
 
                                     <div className="grid grid-cols-1 gap-2">
-                                        <p className="text-xs font-bold text-gray-500"><div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-20"></div></p>
-                                        <p className="text-xs font-bold text-gray-500"><div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-40"></div></p>
-                                        <p className="text-xs font-bold text-gray-500"><div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-20"></div></p>
+                                        <p className="text-xs font-bold text-gray-300"><div class="h-2.5 bg-gray-300 rounded-full w-20"></div></p>
+                                        <p className="text-xs font-bold text-gray-300"><div class="h-2.5 bg-gray-300 rounded-full w-40"></div></p>
+                                        <p className="text-xs font-bold text-gray-300"><div class="h-2.5 bg-gray-300 rounded-full w-20"></div></p>
                                     </div>
                                 </div>
                                 <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-5 items-center justify-center">
@@ -99,9 +99,8 @@ export default function OHTLoading_skeleton() {
 
                                     <div className='flex items-center justify-center'>
                                         <button
-                                            onClick={() => openModal(order.id)}
                                             type="button"
-                                            className=" focus:outline-none h-10 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                            className=" focus:outline-none h-10 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm p-1"
                                         >
                                             View Order
                                         </button>
