@@ -5,7 +5,6 @@ import { useStateContext } from '../../../contexts/ContextProvider';
 export default function ProductCard(item) {
     const { currentUser } = useStateContext();
 
-
     const handleOrderClick = () => {
         if (currentUser.role !== 'customer') {
             return <Link to="/login" />;
@@ -26,7 +25,7 @@ export default function ProductCard(item) {
             </div>
             <div className="flex flex-col px-2 py-0.5">
                 <div>
-                    <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="text-[2rem] font-semibold tracking-tight text-gray-900 dark:text-white">
                         {item.name}
                     </h5>
                 </div>

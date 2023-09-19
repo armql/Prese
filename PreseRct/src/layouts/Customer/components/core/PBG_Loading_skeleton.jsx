@@ -61,11 +61,8 @@ export default function PBG_Loading_skeleton() {
     };
 
     return (
-        <div className="mt-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-4 px-20 gap-6">
-                {renderProducts(selectedTab)}
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-12 px-6 gap-6 ">
+            {renderProducts(selectedTab)}
         </div>
-
     )
 }

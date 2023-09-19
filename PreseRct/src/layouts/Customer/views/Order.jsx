@@ -1,5 +1,5 @@
 import React from "react";
-import Productsbg from "../components/Productsbg";
+import OrderMenu from "../components/OrderMenu";
 export default function Order() {
   
 
@@ -7,7 +7,7 @@ export default function Order() {
       <div className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-40">
         <title>Prese | Order</title>
         <h1 className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-95 text-gray-900 font-semibold text-xl p-2.5">View all products</h1>
-        <Productsbg />
+        <OrderMenu />
       </div>
   );
 }

@@ -47,10 +47,10 @@ export default function Home() {
                 <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                     <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-red-200 hover:ring-red-400 active:ring-red-600">
                         Find out about our new Offers.{' '}
-                        <a href="#" className="font-semibold">
+                        <Link to="orders" className="font-semibold">
                             <span className="absolute inset-0" aria-hidden="true" />
                             Check it out here <span aria-hidden="true">&rarr;</span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="text-center">
@@ -62,15 +62,14 @@ export default function Home() {
                         fugiat veniam occaecat fugiat aliqua.
                     </p>
                     <div className="mt-10 flex items-center justify-center gap-x-6">
-                        <a
-                            href="#"
+                        <div
                             className="rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-800 transition:1s focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
                             Online Delivery
-                        </a>
-                        <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                        </div>
+                        <div className="text-sm font-semibold leading-6 text-gray-900">
                             <Link to='/aboutus' >Learn more  <span aria-hidden="true">→</span></Link>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>

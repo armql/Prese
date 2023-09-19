@@ -204,9 +204,6 @@ export default function Signup() {
                 Already have an account?{" "}
                 <Link to="/login" className="text-red-500 hover:cursor-wait" >Login</Link>
               </p>
-              <p className="text-gray-500 text-center">
-                -- -- -- -- -- -- -- or -- -- -- -- -- -- --
-              </p>
               <button type="button" className="btn btnGuest w-full mt-2 p-2 rounded hover:cursor-wait" disabled>
                 CONTINUE AS GUEST
               </button>

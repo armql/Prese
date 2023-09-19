@@ -20,13 +20,14 @@ export default function Checkout() {
   const handleCheckout = (event) => {
     event.preventDefault();
 
-    if (phoneNumberError.trim() === '') {
+    if (phoneNumber.trim() === '') {
       setGlobalError('Phone number is empty, please write a number in order for us to get in contact.')
       console.error('Phone number error:', phoneNumberError);
       return;
     }
+
     if (comment.trim() === '') {
-      setGlobalError('Comment is empty.')
+      setGlobalError('Comment is empty, please write a comment or un-check for no comment.')
       console.error('Comment is empty');
       return;
     }
@@ -374,7 +375,7 @@ export default function Checkout() {
                           name="comment"
                           value={comment}
                           placeholder="Write a comment if needed, special request if you have, if not leave blank."
-                          className="no-outline relative focus:outline-0 w-full rounded-md shadow-sm border-gray-200 focus:z-10 sm:text-sm"
+                          className="relative focus:outline-0 w-full rounded-md shadow-sm border-gray-200 focus:z-10 sm:text-sm"
                           onChange={(e) => setComment(e.target.value)}
                         />
                       </div>
@@ -395,13 +396,20 @@ export default function Checkout() {
                 </fieldset>
                 <div className="col-span-6">
                   {globalError && (
-                    <div className='border-2 borded-red-900 bg-red-100 rounded-md my-2'>
-                      <p className="p-4 text-sm text-red-900">-{globalError}</p>
+                    <div class="flex p-2 mt-4 text-sm text-red-600 rounded-t-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                      <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                      <span class="sr-only">Danger</span>
+                      <div>
+                        <span class="font-medium">Ensure that these requirements are met:</span>
+                        <ul class="mt-1.5 ml-4 list-disc list-inside">
+                          <li>{globalError}</li>
+                        </ul>
+                      </div>
                     </div>
                   )}
                   <button
                     onClick={handleCheckout}
-                    className="block w-full rounded-md bg-red-800 hover:bg-red-900 p-2.5 text-sm text-white transition hover:shadow-sm active:scale-105"
+                    className={`block w-full ${globalError ? 'rounded-b-md bg-red-200 hover:bg-red-400 text-red-950' : 'bg-red-800 rounded-md text-white hover:bg-red-900'} p-2.5  transition hover:shadow-sm active:scale-105`}
                   >
                     Order
                   </button>
