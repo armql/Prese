@@ -121,7 +121,7 @@ export default function Productsbg() {
                                         type="search"
                                         id="default-search"
                                         className="block w-full text-sm bg-white text-gray-900 border-none bg-transparent focus:outline-none focus:ring-0"
-                                        placeholder="Search Products"
+                                        placeholder="Any favorites?"
                                         required
                                     />
                                 </div>
@@ -228,10 +228,8 @@ export default function Productsbg() {
                     </div>
                 </div>
             </div>
-            <div className="mt-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-4 px-20 gap-6">
-                    {renderProducts(selectedTab)}
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-12 px-6 gap-6">
+                {renderProducts(selectedTab)}
             </div>
         </div>
     )

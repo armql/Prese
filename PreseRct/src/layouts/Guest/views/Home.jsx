@@ -8,7 +8,7 @@ import OfferSlider from '../../Universal/components/OfferSlider';
 import NewsLetter from '../../Universal/components/NewsLetter';
 
 export default function Home() {
-    const { setCurrentUser, userToken } = useStateContext();
+    const { setCurrentUser } = useStateContext();
     const [validatingUser, setValidatingUser] = useState(true);
     const navigate = useNavigate();
 
@@ -17,16 +17,18 @@ export default function Home() {
             .get('/me')
             .then(({ data }) => {
                 setCurrentUser(data);
+                console.log(data);
                 if (data.role === 'manager') {
                     navigate('../../management')
-                }else if (data.role === 'customer') {
+                } else if (data.role === 'customer') {
                     navigate('../../app')
-                }else if (data.role === 'driver') {
+                } else if (data.role === 'driver') {
                     navigate('../../workdrive')
-                }else if (data.role === 'employee') {
+                } else if (data.role === 'employee') {
                     navigate('../../workspace')
+                } else {
+                    setValidatingUser(false);
                 }
-                setValidatingUser(false);
             })
             .catch(() => {
                 setValidatingUser(false);

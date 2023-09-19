@@ -167,13 +167,9 @@ class OrderController extends Controller
     {
         $perPage = $request->input('perPage', 10);
         $userId = $request->input('user_id');
-        $query = Order::with('user', 'orderItems.product', 'orderItems');
 
-        if ($userId) {
-            $query->whereHas('user', function ($q) use ($userId) {
-                $q->where('id', $userId);
-            });
-        }
+        $query = Order::with('user', 'orderItems.product', 'orderItems')
+            ->where('user_id', $userId);
 
         $orders = $query->paginate($perPage);
 
@@ -315,16 +311,30 @@ class OrderController extends Controller
         return response()->json(['count' => $count]);
     }
 
-    public function createOrderWithItems(Request $request)
+    public function createOrder(Request $request)
     {
         $userId = $request->input('user_id');
+        $comment = $request->input('comment');
+        $phoneNumber = $request->input('phone_number');
         $orderItems = $request->input('order_items');
+
+        // Check if phone number is provided
+        if (empty($phoneNumber)) {
+            return response()->json(['error' => 'Phone number is required.'], 400);
+        }
+
+        // If comment is not provided, set default value
+        if (empty($comment)) {
+            $comment = 'No comment was left';
+        }
 
         DB::beginTransaction();
 
         try {
             $order = new Order();
             $order->user_id = $userId;
+            $order->comment = $comment;
+            $order->phone_number = $phoneNumber;
             $order->status = 'pending';
             $order->save();
 

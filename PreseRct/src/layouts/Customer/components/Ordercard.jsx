@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 export default function Ordercard(props) {
 
     return (
-        <div className="max-w-sm py-2 px-15 shadow-md bg-white backdrop-filter backdrop-blur-lg bg-opacity-97 rounded-md">
-            <a href="#">
+        <div className="shadow-sm bg-white backdrop-filter backdrop-blur-lg bg-opacity-97 rounded-md">
+            <div>
                 <img className="p-8 rounded-t-lg" src={props.preview} alt="product image" />
-            </a>
+            </div>
             <div className="px-5 pb-5">
-                <a href="#">
+                <div>
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 ">{props.name}</h5>
-                </a>
+                </div>
                 <div className="flex items-center justify-between">
                     <span className="text-3xl font-bold text-gray-900 ">{props.retail_price}EUR</span>
-                    <Link to="#"
+                    <Link to="../orders"
                         className="hover:text-white hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add to Cart <span aria-hidden="true">&rarr;</span></Link>
                 </div>
             </div>

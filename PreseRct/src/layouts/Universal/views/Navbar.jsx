@@ -62,7 +62,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`fixed top-0 right-0 left-0 z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-60`}>
+    <nav className={`z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-60`}>
       <div className="max-w-screen-l flex flex-wrap items-center justify-between mx-auto p-3">
         <a href="#" className="flex items-center">
           <span className="self-center text-2xl font-bold whitespace-nowrap text-red-500 dark:text-white">

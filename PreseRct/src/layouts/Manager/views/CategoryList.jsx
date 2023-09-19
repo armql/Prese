@@ -55,7 +55,7 @@ export default function CategoryList() {
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="w-6 h-6 hover:scale-110"
+                            className="w-6 h-6 hover:scale-110 transition"
                         >
                             <path
                                 strokeLinecap="round"

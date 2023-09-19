@@ -16,7 +16,6 @@ import ProductList from "./layouts/Manager/views/ProductList";
 import ProductRegister from "./layouts/Manager/components/ProductRegister";
 import ProductEdit from "./layouts/Manager/components/ProductEdit";
 import Order from "./layouts/Customer/views/Order"
-import OrderInvoice from "./layouts/Customer/views/OrderInvoice";
 import OrderHistory from "./layouts/Customer/views/OrderHistory";
 import ManageOrder from "./layouts/Employee/views/ManageOrder";
 import OurLocations from "./layouts/Universal/views/OurLocations";
@@ -28,7 +27,6 @@ import UserList from "./layouts/Manager/views/UserList"
 import UserEdit from "./layouts/Manager/components/UserEdit"
 import UserCreate from "./layouts/Manager/components/UserCreate"
 import DriverLayout from "./layouts/Driver/DriverLayout"
-import OrderTrack from "./layouts/Customer/components/OrderTrack";
 import Checkout from "./layouts/Customer/components/Checkout";
 import DriverDashboard from "./layouts/Driver/views/Dashboard";
 import NotFound from "./layouts/NotFound";
@@ -41,11 +39,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Navigate to="home" />
-            },
-            {
-                path: 'home',
-                element: <GuestHome />
+                element: <Navigate to="aboutus" />
             },
             {
                 path: 'aboutus',
@@ -90,10 +84,6 @@ const router = createBrowserRouter([
                 element: <OrderHistory />
             },
             {
-                path: 'orderhistory/ordertrack/:id',
-                element: <OrderTrack />
-            },
-            {
                 path: 'checkout',
                 element: <Checkout />
             },
@@ -125,20 +115,20 @@ const router = createBrowserRouter([
             },
         ]
     },
-    // {
-    //     path: '/workdrive',
-    //     element: <DriverLayout />,
-    //     children: [
-    //         {
-    //             path: '/workdrive',
-    //             element: <Navigate to="dashboard/orders" />
-    //         },
-    //         {
-    //             path: 'dashboard/:page',
-    //             element: <DriverDashboard />
-    //         },
-    //     ]
-    // },
+    {
+        path: '/workdrive',
+        element: <DriverLayout />,
+        children: [
+            {
+                path: '/workdrive',
+                element: <Navigate to="dashboard/orders" />
+            },
+            {
+                path: 'dashboard/:page',
+                element: <DriverDashboard />
+            },
+        ]
+    },
     {
         path: '/management',
         element: <ManagerLayout />,

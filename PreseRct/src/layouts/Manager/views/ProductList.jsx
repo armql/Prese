@@ -40,11 +40,11 @@ export default function ProductList() {
     
     return (
         <div id="parent">
-            <title>GFC | Product List</title>
+            <title>Prese | Product List</title>
             <div className="flex justify-between p-1 bg-white">
                 <div className="p-2">
                     <Link to="../productregister" className='text-black font-bold gap-1 rounded-3xl'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 hover:scale-110">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 hover:scale-110 transition">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                     </Link>

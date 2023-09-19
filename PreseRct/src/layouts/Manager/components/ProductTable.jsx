@@ -263,49 +263,51 @@ export default function ProductTable() {
 
 
     return (
-        <div className="overflow-x-auto w-full">
-            <table className="w-full border border-gray-300 divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                    <tr>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            ID
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Preview
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Product Name
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Description
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Retail Price
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Market Price
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Date Created
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Created by
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Category
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Edit Product
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Delete Product
-                        </th>
-                    </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                    {ProductDetails}
-                </tbody>
-            </table >
+        <div className="parent">
+            <div className="overflow-x-auto">
+                <table className="w-full border border-gray-300 divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                        <tr>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                ID
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Preview
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Product Name
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Description
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Retail Price
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Market Price
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Date Created
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Created by
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Category
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Edit Product
+                            </th>
+                            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Delete Product
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                        {ProductDetails}
+                    </tbody>
+                </table >
+            </div>
             <MOTable_pagination
                 currentPage={currentPage}
                 totalPages={totalPages}

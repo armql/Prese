@@ -9,9 +9,9 @@ export default function HomeValidation_skeleton() {
             <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                 <div className="hidden sm:mb-8 sm:flex animate-pulse sm:justify-center">
                     <div className="relative h-6 w-80 rounded-full bg-red-100 px-3 py-1 text-sm leading-6 text-gray-600 ring-2 ring-red-50 hover:ring-red-400 ">
-                        <a href="#" className="font-semibold">
+                        <div className="font-semibold">
                             <span className="absolute inset-0" aria-hidden="true" />
-                        </a>
+                        </div>
                     </div>
                 </div>
                 <div className="text-center">
@@ -45,14 +45,13 @@ export default function HomeValidation_skeleton() {
                     </div>
 
                     <div className="mt-10 flex items-center justify-center gap-x-6">
-                        <a
-                            href="#"
+                        <div
                             className="rounded-md animate-pulse w-40 h-8 bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-800 transition:1s focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
-                        </a>
-                        <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                        </div>
+                        <div className="text-sm font-semibold leading-6 text-gray-900">
                             <Link to='/aboutus' ><div class="h-4 bg-gray-700 rounded-full dark:bg-gray-600 w-40 animate-pulse"></div></Link>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,7 +59,7 @@ export default function HomeValidation_skeleton() {
             <section className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-20">
                 <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 z-10 relative">
                     <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 animate-pulse md:text-5xl lg:text-6xl dark:text-white"><div class="h-5 bg-gray-500 rounded-full dark:bg-gray-700 max-w-[640px] mb-3.5 mx-auto"></div></h1>
-                    <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-200"><div role="status" class="mt-3.5 space-y-2.5 animate-pulse">
+                    <div className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-200"><div role="status" class="mt-3.5 space-y-2.5 animate-pulse">
                         <div class="flex justify-center items-center w-full space-x-2">
                             <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32"></div>
                             <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32"></div>
@@ -82,7 +81,7 @@ export default function HomeValidation_skeleton() {
                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
                         </div>
-                    </div></p>
+                    </div></div>
                     <form className="w-full max-w-md mx-auto animate-pulse">
                         <label for="default-email" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Email sign-up</label>
                         <div className="relative hover:cursor-wait">

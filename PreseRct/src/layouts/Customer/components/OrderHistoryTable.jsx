@@ -27,7 +27,7 @@ export default function OrderHistoryTable() {
         setCurrentPage(page);
 
         axiosClient
-            .get(`/orders?page=${page}&perPage=10&user_id=${currentUser.id}`)
+            .get(`/ofrders?page=${page}&perPage=${ordersPerPage}&user_id=${currentUser.id}`)
             .then(response => {
                 setOrders(response.data.orders);
                 const totalOrders = response.data.total;
@@ -38,12 +38,12 @@ export default function OrderHistoryTable() {
             .catch(error => {
                 console.error('Failed to fetch orders', error);
             });
-    }, [loading, currentUser.id]);
+    }, [loading, currentUser.id, ordersPerPage]);
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
         axiosClient
-            .get(`/orders?page=${pageNumber}&perPage=${ordersPerPage}`)
+            .get(`/ofrders?page=${pageNumber}&perPage=${ordersPerPage}`)
             .then(response => {
                 setOrders(response.data.current_page);
                 setLoading(false);
@@ -150,7 +150,7 @@ export default function OrderHistoryTable() {
                 );
             case 'pending':
                 return (
-                    <div className="flex items-center justify-center bg-yellow-200 rounded-full p-1 px-5 text-yellow-700">
+                    <div className="flex items-center justify-center bg-amber-200 rounded-full p-1 px-5 text-amber-700">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -209,7 +209,7 @@ export default function OrderHistoryTable() {
                                                     <button
                                                         onClick={() => openModal(order.id)}
                                                         type="button"
-                                                        className=" focus:outline-none h-10 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                                        className="focus:outline-none h-10 bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-sm text-sm px-2 py-1"
                                                     >
                                                         View Order
                                                     </button>
@@ -261,7 +261,7 @@ export default function OrderHistoryTable() {
                                                 <button
                                                     onClick={() => openModal(order.id)}
                                                     type="button"
-                                                    className=" focus:outline-none h-10 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                                    className=" focus:outline-none h-10 bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-sm text-sm px-2 py-1"
                                                 >
                                                     View Order
                                                 </button>
@@ -280,7 +280,7 @@ export default function OrderHistoryTable() {
             {modalVisible && (
                 <div
                     id="drawer-swipe"
-                    className="fixed z-40 w-full overflow-y-auto max-h-screen bg-white border-t-2 border-gray-300 dark:border-gray-700 transition-transform bottom-0 top-90 left-0 right-0"
+                    className="fixed top-96 z-40 w-full overflow-y-auto max-h-screen bg-white border-t-2 border-gray-300 dark:border-gray-700 transition-transform bottom-0 top-90 left-0 right-0"
                     tabIndex="-1"
                     aria-labelledby="drawer-swipe-label"
                 >
@@ -385,15 +385,6 @@ export default function OrderHistoryTable() {
                                                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                                                     {calculateTotal(selectedOrderItems)}EUR
                                                 </p>
-                                            </div>
-                                            <div className="flex items-center justify-center active:scale-105">
-                                                <Link to={`../orderhistory/ordertrack/${item.id}`} className="flex p-1 bg-green-400 gap-1 text-white rounded-lg focus:outline-none focus:shadow-outline-blue" type="button">
-                                                    <p className='text-white'>Track your order</p>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-6">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                                    </svg>
-                                                </Link>
                                             </div>
                                         </div>
                                     </div>

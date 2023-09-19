@@ -6,7 +6,7 @@ export default function ProductCard(props) {
 
     return (
         <div
-            className="bg-white shadow-md group relative overflow-hidden"
+            className="bg-white shadow-sm transition duration-200 rounded-sm group relative overflow-hidden"
         >
             <div>
                 <div className="rounded-t-lg">
@@ -19,7 +19,7 @@ export default function ProductCard(props) {
             </div>
             <div className="px-1.5 py-2">
                 <div>
-                    <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="text-[1.7rem] font-semibold tracking-tight text-gray-900 dark:text-white">
                         {props.name}
                     </h5>
                 </div>
@@ -31,7 +31,7 @@ export default function ProductCard(props) {
                         onClick={() => {
                             addToCart(props);
                         }}
-                        className="hover:text-red-800 hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-sm text-sm duration-100 px-2 py-4 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 transition"
+                        className="text-red-800 bg-red-100 hover:bg-red-200 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-sm text-sm duration-100 px-2 py-4 text-center transition"
                     >
                         Add to Cart
                     </button>

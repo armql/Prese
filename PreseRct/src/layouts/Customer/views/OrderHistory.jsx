@@ -6,7 +6,7 @@ export default function OrderHistory() {
 
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <title>GFC | Order History</title>
+            <title>Prese | Order History</title>
             <OrderHistoryTable />
         </div>
     );

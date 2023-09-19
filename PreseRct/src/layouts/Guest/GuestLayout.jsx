@@ -17,7 +17,6 @@ export default function GuestLayout() {
       />
       <div className="relative z-10">
         <Navbar />
-      <div className='h-24 border-2 bg-white'></div>
         <Outlet />
         <Footer />
       </div>

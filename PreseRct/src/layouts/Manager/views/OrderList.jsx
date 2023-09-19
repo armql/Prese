@@ -41,7 +41,7 @@ export default function OrderList() {
    
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <title>GFC | Manage Order</title>
+            <title>Prese | Manage Orders</title>
             <OrderTable />
         </div>
     )

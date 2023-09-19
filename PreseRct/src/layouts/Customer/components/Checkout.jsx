@@ -1,26 +1,23 @@
 import React, { useContext, useState } from 'react';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import { CartContext } from '../../../contexts/CartContext';
+import axiosClient from '../../../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Checkout() {
-  const { cartItems, getCartTotal } = useContext(CartContext);
+  const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
   const { currentUser, } = useStateContext();
   const [orderPayment, setOrderPayment] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [numberCheck, setNumberCheck] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [comment, setComment] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [globalError, setGlobalError] = useState('');
+  const navigate = useNavigate();
 
-  const togglePayment = (e) => {
-    if (e.target.value === 'payment-card') {
-      setOrderPayment(true);
-    } else if (e.target.value === 'payment-cash') {
-      setOrderPayment(false);
-    }
-  };
-
-  const handleCheckout = () => {
-
+  const handleCheckout = (event) => {
+    event.preventDefault();
     const orderItems = cartItems.map((item) => ({
       product_id: item.id,
       quantity: item.quantity,
@@ -29,6 +26,7 @@ export default function Checkout() {
     const orderData = {
       user_id: currentUser.id,
       order_items: orderItems,
+      comment: comment,
       phone_number: phoneNumber,
     };
 
@@ -36,34 +34,41 @@ export default function Checkout() {
       .post('/checkout', orderData)
       .then((response) => {
         console.log('Order created:', response.data.order);
-
-        navigate('/orderhistory:page')
+        clearCart();
+        navigate('/app/orderhistory/orders:page');
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error:feafseafdsafedsafe____', error);
+        setGlobalError(error);
       });
+  };
+
+
+  const togglePayment = () => {
+    setOrderPayment(!orderPayment);
   };
 
   const handlePhoneInputChange = (e) => {
     const inputPhoneNumber = e.target.value.trim();
+    const numericInput = inputPhoneNumber.replace(/\D/g, '');
     const kosovoPhoneNumberPattern = /^(044|045)(?:\s\d{3}\s\d{3})?$/;
-  
-    // Remove all spaces and then add spaces every 3rd character, but no more than 2 spaces
-    const formattedPhoneNumber = inputPhoneNumber
-      .replace(/\s/g, '')
-      .replace(/(\d{3})(?=\d)/g, '$1 ');
-  
-    if (formattedPhoneNumber.length <= 12 && kosovoPhoneNumberPattern.test(inputPhoneNumber)) {
+
+    const formattedPhoneNumber = numericInput
+      .replace(/(\d{3})(?=\d)/g, '$1 ')
+      .trim();
+
+    if (formattedPhoneNumber.length <= 12 && kosovoPhoneNumberPattern.test(formattedPhoneNumber)) {
       setNumberCheck(true);
       setPhoneNumber(formattedPhoneNumber);
       setPhoneNumberError('');
     } else {
       setNumberCheck(false);
       setPhoneNumber(formattedPhoneNumber);
+      console.log(formattedPhoneNumber)
       setPhoneNumberError('Invalid number format, number must be from RKO');
     }
   };
-  
+
   let convertImageURL = (items) => {
     const imageURL = items.replace('../GfcRct', '');
     return imageURL;
@@ -74,23 +79,23 @@ export default function Checkout() {
       <section>
         <div className="mx-auto grid grid-cols-1 md:grid-cols-2 bg-red-50">
           <div className="flex flex-col gap-10">
-            <ol class="items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0 px-10 pt-10 bg-white pb-6">
+            <ol className="flex lg:flex-row flex-col justify-center items-center space-y-4 sm:flex sm:space-x-8 sm:space-y-0 px-10 pt-10 bg-white pb-6">
               {
                 cartItems.length > 0 ? (
                   <>
-                    <li class="flex items-center text-red-900 space-x-2.5">
-                      <span class="flex bg-red-100 items-center justify-center w-8 h-8 border text-red-900 border-red-900 rounded-full shrink-0 dark:border-gray-400">
+                    <li className="flex items-center text-red-900 space-x-2.5">
+                      <span className="flex bg-red-100 items-center justify-center w-8 h-8 border text-red-900 border-red-900 rounded-full shrink-0">
                         1
                       </span>
                       <span>
-                        <h3 class="font-medium leading-tight">Ordered Products</h3>
-                        <p class="text-sm">Your order</p>
+                        <h3 className="font-medium leading-tight">Ordered Products</h3>
+                        <p className="text-sm">Your order</p>
                       </span>
                     </li>
                   </>
                 ) : (
-                  <li class="flex items-center text-gray-500 dark:text-gray-400 space-x-2.5">
-                    <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+                  <li className="flex items-center text-gray-500 space-x-2.5">
+                    <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0">
                       1
                     </span>
                     <span>
@@ -168,12 +173,12 @@ export default function Checkout() {
             </div>
           </div>
 
-          <div className="bg-white py-12 md:py-24">
+          <div className="flex items-center justify-center bg-white py-12 md:py-24">
             <div className="mx-auto max-w-lg px-4 lg:px-8">
               <form className="grid grid-cols-6 gap-4">
                 <div className="col-span-6">
                   <label
-                    htmlFor="FirstName"
+                    for="FirstName"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Name
@@ -183,13 +188,13 @@ export default function Checkout() {
                     type="text"
                     id="FirstName"
                     value={currentUser.name}
-                    disabled
+
                     className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                   />
                 </div>
 
                 <div className="col-span-6">
-                  <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
+                  <label for="Email" className="block text-sm font-medium text-gray-700">
                     Email
                   </label>
 
@@ -197,24 +202,23 @@ export default function Checkout() {
                     type="email"
                     id="Email"
                     value={currentUser.email}
-                    disabled
+
                     className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                   />
                 </div>
 
                 <div className="col-span-6">
-                  <label htmlFor="Phone" className="block text-sm font-medium text-gray-700">
+                  <label for="Phone" className="block text-sm font-medium text-gray-700">
                     Phone
                   </label>
 
                   <input
                     type="tel"
-                    id="Phone"
+                    id="phone"
                     className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                     placeholder='Ex. 044 449 944'
-                    value={phoneNumber}
                     maxLength="11"
-                    onChange={handlePhoneInputChange}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                   />
                   {phoneNumberError && (
                     <p className="mt-2 text-sm text-red-600">{phoneNumberError}</p>
@@ -268,7 +272,7 @@ export default function Checkout() {
                     orderPayment && (
                       <div className={`text-sm mt-1 -space-y-px rounded-md bg-white shadow-sm`}>
                         <div>
-                          <label htmlFor="CardNumber" className="sr-only"> Card Number </label>
+                          <label for="CardNumber" className="sr-only"> Card Number </label>
 
                           <input
                             type="text"
@@ -280,7 +284,7 @@ export default function Checkout() {
 
                         <div className="flex">
                           <div className="flex-1">
-                            <label htmlFor="CardExpiry" className="sr-only"> Card Expiry </label>
+                            <label for="CardExpiry" className="sr-only"> Card Expiry </label>
 
                             <input
                               type="text"
@@ -291,7 +295,7 @@ export default function Checkout() {
                           </div>
 
                           <div className="-ms-px flex-1">
-                            <label htmlFor="CardCVC" className="sr-only"> Card CVC </label>
+                            <label for="CardCVC" className="sr-only"> Card CVC </label>
 
                             <input
                               type="text"
@@ -314,12 +318,12 @@ export default function Checkout() {
 
                   <div className="mt-1 -space-y-px rounded-md bg-white shadow-sm">
                     <div>
-                      <label htmlFor="Country" className="sr-only">Country</label>
+                      <label for="Country" className="sr-only">Country</label>
 
                       <select
                         id="Country"
                         value={currentUser.city}
-                        disabled
+
                         className="relative w-full rounded-t-md border-gray-200 focus:z-10 sm:text-sm"
                       >
                         <option>Gjilan</option>
@@ -330,15 +334,36 @@ export default function Checkout() {
                     </div>
 
                     <div>
-                      <label className="sr-only" htmlFor="PostalCode"> ZIP/Post Code </label>
+                      <label className="sr-only" for="PostalCode"> ZIP/Post Code </label>
 
                       <input
                         type="text"
                         id="PostalCode"
                         placeholder="ZIP/Post Code"
                         value={currentUser.address}
-                        disabled
+
                         className="relative w-full rounded-b-md border-gray-200 focus:z-10 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset className="col-span-6">
+                  <legend className="block text-sm font-medium text-gray-700">
+                    Comment
+                  </legend>
+
+                  <div className="mt-1 -space-y-px rounded-md bg-white shadow-sm">
+                    <div>
+                      <label className="sr-only" for="comment"> ZIP/Post Code </label>
+
+                      <textarea
+                        type="text"
+                        id="comment"
+                        name='comment'
+                        value={comment}
+                        placeholder="Write a comment if needed, special request if you have, if not leave blank."
+                        className="relative w-full rounded-b-md border-gray-200 focus:z-10 sm:text-sm"
+                        onChange={(e) => setComment(e.target.value)}
                       />
                     </div>
                   </div>
@@ -348,8 +373,11 @@ export default function Checkout() {
                     onClick={handleCheckout}
                     className="block w-full rounded-md bg-[#B31312] p-2.5 text-sm text-white transition hover:shadow-lg"
                   >
-                    Pay Now
+                    Order
                   </button>
+                  {globalError && (
+                    <p className="mt-2 text-sm text-red-600">{globalError}</p>
+                  )}
                 </div>
               </form>
             </div>

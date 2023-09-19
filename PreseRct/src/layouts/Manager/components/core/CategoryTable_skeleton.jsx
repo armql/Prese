@@ -2,7 +2,6 @@ import React from 'react';
 
 export default function CategoryTableSelekton() {
   return (
-    
      <div role="status" className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-95 max-w p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700">
                 <div className="flex items-center justify-between">
                     <div>

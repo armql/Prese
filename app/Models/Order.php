@@ -15,6 +15,8 @@ class Order extends Model
         'driver_id',
         'employee_id',
         'status',
+        'comment',
+        'phone_number',
     ];
 
     public function user()

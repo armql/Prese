@@ -13,15 +13,20 @@ export default function Home() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!userToken) {
+            navigate('../../');
+            return;
+        }
+
         axiosClient
             .get('/me')
             .then(({ data }) => {
                 setCurrentUser(data);
                 if (data.role === 'manager') {
                     navigate('../../management')
-                }else if (data.role === 'driver') {
+                } else if (data.role === 'driver') {
                     navigate('../../workdrive')
-                }else if (data.role === 'employee') {
+                } else if (data.role === 'employee') {
                     navigate('../../workspace')
                 }
                 setValidatingUser(false);

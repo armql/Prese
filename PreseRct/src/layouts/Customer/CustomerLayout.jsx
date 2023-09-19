@@ -23,7 +23,6 @@ export default function CustomerLayout() {
             />
             <div className="relative z-10">
                 <Navbar />
-                <div className='h-36 bg-white'></div>
                 <Outlet />
                 <Cart showModal={showModal} toggle={toggle} />
                 <Footer />

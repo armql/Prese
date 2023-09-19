@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axiosClient from '../../../api/axios';
 import Ordercard from './Ordercard';
 import ProductDisplaySkeleton from '../../Universal/components/core/ProductDisplayTab_skeleton';
-import { Drawer } from 'flowbite';
 export default function CategoryTab() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -78,7 +77,7 @@ export default function CategoryTab() {
                 </ul>
             </div>
             <div className="mt-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-4 px-20 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-4 px-20 gap-6">
                     {renderProducts(selectedTab)}
                 </div>
             </div>

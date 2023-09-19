@@ -6,7 +6,7 @@ export default function MOLoadingModal_skeleton() {
     return (
         <div
             id="drawer-swipe"
-            className=" fixed z-40 w-full overflow-y-auto max-h-screen bg-white border-t-2 border-gray-300 dark:border-gray-700 transition-transform bottom-0 top-90 left-0 right-0"
+            className=" fixed z-40 top-96 w-full overflow-y-auto max-h-screen bg-white border-t-2 border-gray-300 dark:border-gray-700 transition-transform bottom-0 top-90 left-0 right-0"
             tabIndex="-1"
             aria-labelledby="drawer-swipe-label"
         >
