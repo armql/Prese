@@ -14,10 +14,24 @@ export default function Checkout() {
   const [comment, setComment] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
   const [globalError, setGlobalError] = useState('');
+  const [commentEnabled, setCommentEnabled] = useState(false);
   const navigate = useNavigate();
 
   const handleCheckout = (event) => {
     event.preventDefault();
+
+    if (phoneNumberError.trim() === '') {
+      setGlobalError('Phone number is empty, please write a number in order for us to get in contact.')
+      console.error('Phone number error:', phoneNumberError);
+      return;
+    }
+    if (comment.trim() === '') {
+      setGlobalError('Comment is empty.')
+      console.error('Comment is empty');
+      return;
+    }
+
+
     const orderItems = cartItems.map((item) => ({
       product_id: item.id,
       quantity: item.quantity,
@@ -26,7 +40,7 @@ export default function Checkout() {
     const orderData = {
       user_id: currentUser.id,
       order_items: orderItems,
-      comment: comment,
+      comment: commentEnabled ? comment : 'No comment',
       phone_number: phoneNumber,
     };
 
@@ -341,36 +355,56 @@ export default function Checkout() {
                   </div>
                 </fieldset>
                 <fieldset className="col-span-6">
-                  <legend className="block text-sm font-medium text-gray-700">
-                    Comment
-                  </legend>
 
-                  <div className="mt-1 -space-y-px rounded-md bg-white shadow-sm">
-                    <div>
-                      <label className="sr-only" for="comment"> ZIP/Post Code </label>
 
-                      <textarea
-                        type="text"
-                        id="comment"
-                        name='comment'
-                        value={comment}
-                        placeholder="Write a comment if needed, special request if you have, if not leave blank."
-                        className="relative w-full rounded-b-md border-gray-200 focus:z-10 sm:text-sm"
-                        onChange={(e) => setComment(e.target.value)}
+                  <div className="mt-1 -space-y-px bg-white flex gap-2 flex-col">
+
+                    {commentEnabled && (
+
+                      <div>
+                        <legend className="block text-sm font-medium text-gray-700">
+                          Comment
+                        </legend>
+                        <label className="sr-only" htmlFor="comment">
+                          ZIP/Post Code
+                        </label>
+                        <textarea
+                          type="text"
+                          id="comment"
+                          name="comment"
+                          value={comment}
+                          placeholder="Write a comment if needed, special request if you have, if not leave blank."
+                          className="no-outline relative focus:outline-0 w-full rounded-md shadow-sm border-gray-200 focus:z-10 sm:text-sm"
+                          onChange={(e) => setComment(e.target.value)}
+                        />
+                      </div>
+                    )}
+
+                    <div className='flex items-center justify-around'>
+                      <input
+                        type="checkbox"
+                        checked={commentEnabled}
+                        onChange={() => setCommentEnabled(!commentEnabled)}
+                        className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-2"
                       />
+                      <label className="flex items-center text-md gap-2 text-gray-700">
+                        If you need a comment or special request for the order.
+                      </label>
                     </div>
                   </div>
                 </fieldset>
                 <div className="col-span-6">
+                  {globalError && (
+                    <div className='border-2 borded-red-900 bg-red-100 rounded-md my-2'>
+                      <p className="p-4 text-sm text-red-900">-{globalError}</p>
+                    </div>
+                  )}
                   <button
                     onClick={handleCheckout}
-                    className="block w-full rounded-md bg-[#B31312] p-2.5 text-sm text-white transition hover:shadow-lg"
+                    className="block w-full rounded-md bg-red-800 hover:bg-red-900 p-2.5 text-sm text-white transition hover:shadow-sm active:scale-105"
                   >
                     Order
                   </button>
-                  {globalError && (
-                    <p className="mt-2 text-sm text-red-600">{globalError}</p>
-                  )}
                 </div>
               </form>
             </div>

@@ -23,7 +23,6 @@ const UserEdit = () => {
         axiosClient
             .get(`user/${id}/edit`)
             .then((res) => {
-                console.log(res.data);
                 setUser(res.data.user);
                 setLoading(false);
             })
