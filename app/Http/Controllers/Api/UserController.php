@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\Product;
@@ -39,8 +40,42 @@ class UserController extends Controller
         ]);
     }
 
+/**
+     * Update an existing User.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(UpdateProfileRequest $request, int $id)
+    {
+        $data = $request->validated();
+
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No user found'
+            ], 404);
+        }
+
+        $user->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User updated successfully',
+            'user' => $user
+        ]);
+    }
+
+
     /**
-     * Update an existing product.
+     * Update an existing User.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

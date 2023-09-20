@@ -8,7 +8,6 @@ export default function ProductCard(props) {
         <div
             className="bg-white shadow-sm transition duration-200 rounded-sm group relative overflow-hidden"
         >
-            
             <div>
                 <div className="rounded-t-lg">
                     <img
@@ -20,12 +19,12 @@ export default function ProductCard(props) {
             </div>
             <div className="px-1.5 py-2">
                 <div>
-                    <h5 className="text-[1.7rem] font-semibold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="text-[1.7rem] font-semibold tracking-tight text-gray-900">
                         {props.name}
                     </h5>
                 </div>
                 <div className="flex items-center justify-between">
-                    <span className="text-3xl font-bold text-gray-900 dark:text-white">
+                    <span className="text-3xl font-bold text-gray-900">
                         {props.retail_price}EUR
                     </span>
                     <button

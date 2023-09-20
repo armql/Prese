@@ -4,7 +4,7 @@ import Pagination from './core/OHT_pagination'
 import { useStateContext } from '../../../contexts/ContextProvider';
 import axiosClient from '../../../api/axios';
 import OHTModalSkeleton from './core/OHTModal_skeleton';
-import OHTLoadingSkeleton from './core/OHTLoading_skeleton';
+import SimpleLoader from '../../Universal/core/SimpleLoader';
 
 export default function OrderHistoryTable() {
     const { currentUser } = useStateContext();
@@ -174,7 +174,7 @@ export default function OrderHistoryTable() {
 
     if (loading) {
         return (
-            <OHTLoadingSkeleton />
+            <SimpleLoader />
         )
     }
 

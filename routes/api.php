@@ -70,6 +70,7 @@ Route::post('/checkout', [OrderController::class, 'createOrder']);
 Route::get('user', [UserController::class, 'index']);
 Route::post('user', [UserController::class, 'create']);
 Route::put('user/{id}/', [UserController::class, 'update']);
+Route::put('userprofile/{id}/', [UserController::class, 'updateProfile']);
 Route::get('user/{id}/edit', [UserController::class, 'edit']);
 Route::delete('user/{id}/delete', [UserController::class, 'destroy']);
 Route::get('/users/count', [UserController::class, 'count']);

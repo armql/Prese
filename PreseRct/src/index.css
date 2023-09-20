@@ -23,6 +23,6 @@ html {
     padding: 0;
 }
 
-input:focus,textarea:focus {
+input:focus,textarea:focus, select:focus {
     @apply focus:outline-none focus:ring-0 focus:border-red-800 focus:border-2
 }

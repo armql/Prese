@@ -32,6 +32,7 @@ export default function OrderMenu() {
                 console.error('Error fetching categories:', error);
             });
     }, []);
+    
     const handleTabClick = (tabName) => {
         setSelectedTab(tabName);
     };

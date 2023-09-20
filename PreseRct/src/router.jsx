@@ -3,7 +3,7 @@ import GuestLayout from "./layouts/Guest/GuestLayout"
 import CustomerLayout from "./layouts/Customer/CustomerLayout"
 import EmployeeLayout from "./layouts/Employee/EmployeeLayout"
 import ManagerLayout from "./layouts/Manager/ManagerLayout"
-import GuestHome from "./layouts/Customer/views/Home";
+import GuestHome from "./layouts/Guest/views/Home";
 import CustomerHome from "./layouts/Customer/views/Home";
 import AboutUs from "./layouts/Universal/views/AboutUs";
 import Login from "./layouts/Guest/views/Login";
@@ -30,6 +30,7 @@ import DriverLayout from "./layouts/Driver/DriverLayout"
 import Checkout from "./layouts/Customer/views/Checkout";
 import DriverDashboard from "./layouts/Driver/views/Dashboard";
 import NotFound from "./layouts/NotFound";
+import Profile from "./layouts/Customer/views/Profile";
 
 
 const router = createBrowserRouter([
@@ -39,12 +40,12 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Navigate to="aboutus" />
+                element: <Navigate to="home" />
             },
-            // {
-            //     path: 'home',
-            //     element: <GuestHome />
-            // },
+            {
+                path: 'home',
+                element: <GuestHome />
+            },
             {
                 path: 'aboutus',
                 element: <AboutUs />
@@ -91,7 +92,10 @@ const router = createBrowserRouter([
                 path: 'checkout',
                 element: <Checkout />
             },
-
+            {
+                path: 'checkout/editprofile',
+                element: <Profile />
+            },
         ]
     }, {
         path: '/workspace',

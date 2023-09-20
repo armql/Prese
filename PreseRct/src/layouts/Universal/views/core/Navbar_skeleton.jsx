@@ -3,7 +3,7 @@ import Logo from '../../images/WEBDEV.svg';
 
 export default function Navbar_skeleton() {
     return (
-        <nav className="fixed top-0 right-0 left-0 z-40 bg-white backdrop-filter backdrop-blur-lg bg-opacity-60">
+        <nav className="z-40 bg-white backdrop-filter backdrop-blur-lg bg-opacity-60">
             <div className="max-w-screen-l flex flex-wrap items-center justify-between mx-auto p-3">
                 <div className="flex items-center">
                         <img src={Logo} alt="" className='w-24 sm:w-40 h-24 object-cover' />

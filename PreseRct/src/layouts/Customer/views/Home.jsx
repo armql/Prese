@@ -39,15 +39,15 @@ export default function Home() {
     if (validatingUser) {
         return <HomeValidationSkeleton />;
     }
-
+    
     return (
         <div className='bg-white backdrop-filter backdrop-blur-lg bg-opacity-20'>
             <title>Prese | Home</title>
             <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                 <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-                    <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-red-200 hover:ring-red-400 active:ring-red-600">
+                    <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-red-200 hover:ring-red-400 active:ring-red-600 transition duration-600 hover:translate-x-1 active:translate-x-4">
                         Find out about our new Offers.{' '}
-                        <Link to="orders" className="font-semibold">
+                        <Link to="/app/order" className="font-semibold">
                             <span className="absolute inset-0" aria-hidden="true" />
                             Check it out here <span aria-hidden="true">&rarr;</span>
                         </Link>
@@ -67,7 +67,7 @@ export default function Home() {
                         >
                             Online Delivery
                         </div>
-                        <div className="text-sm font-semibold leading-6 text-gray-900">
+                        <div className="text-sm font-semibold leading-6 text-gray-900 transition duration-500 hover:translate-x-1 active:translate-x-4">
                             <Link to='/aboutus' >Learn more  <span aria-hidden="true">→</span></Link>
                         </div>
                     </div>

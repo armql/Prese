@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import { CartContext } from '../../../contexts/CartContext';
 import axiosClient from '../../../api/axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SimpleLoader from '../../Universal/core/SimpleLoader';
 
 export default function Checkout() {
@@ -57,13 +57,14 @@ export default function Checkout() {
       return;
     }
 
-    if (comment.trim() === '') {
-      setGlobalError('Comment is empty, please write a comment or un-check for no comment.')
+    if (commentEnabled && comment.trim() === '') {
+      setGlobalError('Comment is empty, please write a comment.');
       console.error('Comment is empty');
       return;
     }
-
-
+  
+    const commentToSubmit = comment.trim() === '' ? 'No comment' : comment;
+  
     const orderItems = cartItems.map((item) => ({
       product_id: item.id,
       quantity: item.quantity,
@@ -72,7 +73,7 @@ export default function Checkout() {
     const orderData = {
       user_id: currentUser.id,
       order_items: orderItems,
-      comment: commentEnabled ? comment : 'No comment',
+      comment: commentToSubmit,
       phone_number: phoneNumber,
     };
 
@@ -214,12 +215,12 @@ export default function Checkout() {
           <div className="flex items-center justify-center bg-white py-12 md:py-24">
             <div className="relative mx-auto max-w-lg px-4 pt-10 lg:px-8">
               <div className='absolute top-0 right-0'>
-                <div className='flex gap-2 hover:bg-red-100 border-transparent border-2 hover:border-red-200 hover:shadow-md rounded-sm p-1 font-semibold hover:text-red-900 text-sm hover:cursor-pointer hover:scale-105 active:scale-100 transition'>
+                <Link to={`editprofile`} className='flex gap-2 hover:bg-red-100 border-transparent border-2 hover:border-red-200 hover:shadow-md rounded-sm p-1 font-semibold hover:text-red-900 text-sm hover:cursor-pointer hover:scale-105 active:scale-100 transition'>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                   </svg>
                   Edit Profile
-                </div>
+                </Link>
               </div>
               <form className="grid grid-cols-6 gap-4">
                 <div className="col-span-6">
