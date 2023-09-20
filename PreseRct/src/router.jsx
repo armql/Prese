@@ -55,7 +55,7 @@ const router = createBrowserRouter([
                 element: <OurLocations />
             },
             {
-                path: 'login',
+                path: '/login',
                 element: <Login />
             },
             {
@@ -199,10 +199,10 @@ const router = createBrowserRouter([
             }
         ]
     },
-    {
-        path: "*",
-        element: <NotFound />
-    }
+    // {
+    //     path: "*",
+    //     element: <NotFound />
+    // }
 ])
 
 export default router

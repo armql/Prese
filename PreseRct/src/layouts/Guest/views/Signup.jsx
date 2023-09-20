@@ -52,7 +52,7 @@ export default function Signup() {
         address,
       })
       .then(() => {
-        navigate("/");
+        navigate("/login");
       })
       .catch((error) => {
         if (error.response && error.response.data && error.response.data.errors) {

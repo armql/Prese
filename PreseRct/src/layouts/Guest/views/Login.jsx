@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useStateContext } from '../../../contexts/ContextProvider';
 import { useState } from "react";
 import axiosClient from "../../../api/axios";
@@ -11,8 +11,18 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ __html: "" });
   const [submitting, setSubmitting] = useState(false);
-
+  const location = useLocation();
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    clearURLParameters();
+  }, []);
+
+  const clearURLParameters = () => {
+    const url = window.location.href.split('?')[0];
+    window.history.replaceState({}, document.title, url);
+  };
+  
 
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -30,23 +40,26 @@ export default function Login() {
         setCurrentUser(data.user);
         setUserToken(data.token);
         if (data.user.role === 'manager') {
-          navigate('management');
+          clearURLParameters();
+          navigate('/management');
           Swal.fire(
             `Hello ${data.user.name}!`,
             `Welcome back ${data.user.role}.`,
             'info'
           )
         } else if (data.user.role === 'employee') {
-          navigate('workspace');
+          clearURLParameters();
+          navigate('/workspace');
           Swal.fire(
             `Hello ${data.user.name}!`,
             `Welcome back ${data.user.role}.`,
             'info'
           )
         } else if (data.user.role === 'customer') {
-          navigate('app');
+          clearURLParameters();
+          navigate('/app');
         }else if (data.user.role === 'driver') {
-          navigate('workdrive');
+          navigate('../workdrive');
           Swal.fire(
             `Hello ${data.user.name}!`,
             `Welcome back ${data.user.role}.`,
