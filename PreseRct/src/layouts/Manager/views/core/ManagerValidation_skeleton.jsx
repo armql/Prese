@@ -39,8 +39,8 @@ export default function ManagerValidation_skeleton() {
     }, []);
 
     return (
-        <div className='flex justify-center items-center bg-white rounded-md shadow-xl backdrop-filter backdrop-blur-lg bg-opacity-90'>
-            <title>GFC | Authenticating</title>
+        <div className='flex justify-center items-center bg-white rounded-md backdrop-filter backdrop-blur-lg bg-opacity-90'>
+            <title>Prese | Authenticating</title>
             <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                 <div className="text-center">
                     <div className="mt-10  gap-x-6">

@@ -86,7 +86,7 @@ export default function Signup() {
 
   if (submitting) {
     return (
-      <div className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-20">
+      <div className="bg-black backdrop-filter backdrop-blur-xl bg-opacity-50">
         <div className="flex items-center justify-center p-4 opacity-60 ">
           <title>Prese | Signup</title>
           <div className="signup m-10 hover:cursor-wait">
@@ -216,27 +216,13 @@ export default function Signup() {
   }
 
   return (
-    <div className="bg-white backdrop-filter backdrop-blur-lg bg-opacity-20">
-      {showNotification && (
-        <div id="alert-border-1" className="flex p-4 mb-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800" role="alert">
-          <svg className="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path>
-          </svg>
-          <div className="ml-3 text-sm font-medium">
-          {notificationMessage} <Link to="/login" className="font-semibold underline hover:no-underline">Login</Link>. Join if you want.
-          </div>
-          <button type="button" className="ml-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-border-1" aria-label="Close">
-            <span className="sr-only">Dismiss</span>
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-          </button>
-        </div>
-      )}
-      <div className="flex items-center justify-center p-4">
-        <title>GFC | Signup</title>
+    <div className="bg-black backdrop-filter backdrop-blur-xl bg-opacity-50">
+      <div className="flex items-center justify-center">
+        <title>Prese | Signup</title>
 
-        <div className="signup m-10">
-          <h2 className="mb-3 text-center font-bold text-xl">Sign up</h2>
-          <form onSubmit={signupValidation}>
+        <div className="bg-white backdrop-blur-sm bg-opacity-90 px-20 py-16 shadow-sm rounded-sm m-10">
+          <h2 className="mb-3 text-center font-bold text-4xl">Sign up</h2>
+          <form onSubmit={signupValidation} className='w-96'>
             <div className="form-group mb-2">
               <label
                 htmlFor="text"
@@ -246,7 +232,7 @@ export default function Signup() {
               <input
                 type="text"
                 name="username"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Enter username"
                 value={username}
                 onChange={(ev) => setUsername(ev.target.value)}
@@ -261,7 +247,7 @@ export default function Signup() {
               <input
                 type="email"
                 name="email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Enter email"
                 value={email}
                 onChange={(ev) => setEmail(ev.target.value)}
@@ -275,7 +261,7 @@ export default function Signup() {
               </label>
               <select
                 id="disabledSelect"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 name="city"
                 value={city}
                 onChange={(ev) => setCity(ev.target.value)}
@@ -301,7 +287,7 @@ export default function Signup() {
                 type="text"
                 name="address"
                 id="address"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Write your address here"
                 value={address}
                 onChange={(ev) => setAddress(ev.target.value)}
@@ -316,7 +302,7 @@ export default function Signup() {
               <input
                 type="password"
                 name="password"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Enter password"
                 value={password}
                 onChange={(ev) => setPassword(ev.target.value)}
@@ -331,7 +317,7 @@ export default function Signup() {
               <input
                 type="password"
                 name="confirm-password"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Confirm password"
                 value={passwordConfirmation}
                 onChange={(ev) => setPasswordConfirmation(ev.target.value)}
@@ -368,7 +354,7 @@ export default function Signup() {
             )}
 
 
-            <button type="submit" className="btn btn-danger w-full mt-4 p-2 btn-signup rounded bg-red-500 focus:cursor-wait text-white font-bold focus:ring-white">
+            <button type="submit" className="w-full mt-4 p-2 rounded bg-red-500 hover:scale-105 transition active:scale-100 hover:bg-red-600 text-white font-bold active:cursor-wait">
               Sign Up
             </button>
 
@@ -376,10 +362,7 @@ export default function Signup() {
               Already have an account?{" "}
               <Link to="/login" className="text-red-500 hover:text-red-700 underline focus:cursor-wait" >Login</Link>
             </p>
-            <p className="text-gray-500 text-center">
-              -- -- -- -- -- -- -- or -- -- -- -- -- -- --
-            </p>
-            <Link type="button" to='../' className="btn text-center btnGuest w-full mt-2 p-2 rounded focus:cursor-wait">
+            <Link type="button" to='../' className="text-center hover:border-gray-500 hover:shadow-sm border-transparent transition border-2 w-full mt-2 p-2 rounded active:cursor-wait hover:bg-gray-50">
               CONTINUE AS GUEST
             </Link>
           </form>
