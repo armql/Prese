@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom'; // Remove NavLink import from 'react-router-dom';
 import axiosClient from '../../../api/axios';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import navLinksData from '../data/NavLinksData';
@@ -88,7 +88,7 @@ export default function Navbar() {
             >
               <path
                 fillRule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                d="M3 5a1 1 0 011-1h12 a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
               ></path>
             </svg>
           </button>
@@ -96,29 +96,22 @@ export default function Navbar() {
         <div className={`items-center justify-between bg-transparent ${isMenuOpen ? 'flex' : 'hidden'} w-full md:flex md:w-auto md:order-2`} id="navbar-cta">
           <ul className="flex flex-col font-medium md:p-0 mt-4 border border-none rounded-lg bg-transparent md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {filteredLinks.map((link) => (
-              <NavLink
-                key={link.text}
-                exact
-                to={link.to}
-                className={`nav-link hover:text-red-600 py-2 px-4 rounded-md ${activeLink === link.text ? 'text-red-500' : 'text-black'}`}
-                activeClassName="active"
-                onClick={(ev) => {
-                  if (link.text === 'Log out') {
-                    logout(ev);
-                  } else {
-                    setActiveLink(link.text);
-                  }
-                }}
-                isActive={(match) => {
-                  if (match && link.text === activeLink) {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-              >
-                {link.text}
-              </NavLink>
+              <li key={link.text}>
+                <NavLink
+                  exact={true} // Use exact as a string
+                  to={link.to}
+                  className={`nav-link hover:text-red-600 py-2 px-4 rounded-md ${activeLink === link.text ? 'text-red-500' : 'text-black'}`}
+                  onClick={(ev) => {
+                    if (link.text === 'Log out') {
+                      logout(ev);
+                    } else {
+                      setActiveLink(link.text);
+                    }
+                  }}
+                >
+                  {link.text}
+                </NavLink>
+              </li>
             ))}
           </ul>
         </div>

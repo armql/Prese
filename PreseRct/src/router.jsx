@@ -27,7 +27,7 @@ import UserList from "./layouts/Manager/views/UserList"
 import UserEdit from "./layouts/Manager/components/UserEdit"
 import UserCreate from "./layouts/Manager/components/UserCreate"
 import DriverLayout from "./layouts/Driver/DriverLayout"
-import Checkout from "./layouts/Customer/components/Checkout";
+import Checkout from "./layouts/Customer/views/Checkout";
 import DriverDashboard from "./layouts/Driver/views/Dashboard";
 import NotFound from "./layouts/NotFound";
 
@@ -146,7 +146,7 @@ const router = createBrowserRouter([
                 element: <Dashboard />
             },
             {
-                path: 'categorylist/:page',
+                path: 'categorylist',
                 element: <CategoryList />
             },
             {

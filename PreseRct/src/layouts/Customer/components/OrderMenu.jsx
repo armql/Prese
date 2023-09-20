@@ -12,7 +12,7 @@ export default function OrderMenu() {
     const [selectedTab, setSelectedTab] = useState('');
     const [isActive, setIsActive] = useState(false);
     const [lowhiFilter, setlowhiFilter] = useState(false);
-    const { currentUser } = useStateContext();
+    const { currentUser, setCurrentUser } = useStateContext();
 
     useEffect(() => {
         axiosClient
@@ -48,7 +48,7 @@ export default function OrderMenu() {
         setlowhiFilter(!lowhiFilter);
     };
 
-    if (!loading) {
+    if (loading) {
         return (
             <>
                 <OrderBarLoading
@@ -100,7 +100,7 @@ export default function OrderMenu() {
                                     Search
                                 </label>
                                 <div className="flex items-center bg-white p-0.5 hover:cursor-pointer border border-gray-300 rounded-lg px-2">
-                                    <button type="submit" className="flex items-center active:scale-105">
+                                    <button type='submit' onClick={() => {}} className="flex items-center active:scale-105">
                                         <svg
                                             className="w-5 h-5 text-gray-500 dark:text-gray-400"
                                             aria-hidden="true"
@@ -160,7 +160,7 @@ export default function OrderMenu() {
                                         {lowhiFilter ? 'LOW' : 'HIGH'}
                                     </button>
                                 </div>
-                                <button className='bg-red-100 text-red-900 hover:bg-red-200 transition active:scale-105 text-xs font-semibold uppercase p-1 rounded-lg' type='submit'>
+                                <button onClick={() => {}} className='bg-red-100 text-red-900 hover:bg-red-200 transition active:scale-105 text-xs font-semibold uppercase p-1 rounded-lg' >
                                     Clear
                                 </button>
                             </div>
@@ -200,7 +200,7 @@ export default function OrderMenu() {
                                     <div>Prese products by</div>
                                     <div className="font-medium truncate">Bob's Favorites</div>
                                 </div>
-                                <ul className="grid grid-cols-1 items-center justify-center text-center py-2 text-sm text-gray-700" ARIA-labelledby="dropdownInformationButton">
+                                <ul className="grid grid-cols-1 items-center justify-center text-center py-2 text-sm text-gray-700" aria-labelledby="dropdownInformationButton">
                                     {categories.map(category => (
                                         <li className=" mr-2" role="presentation" key={category.id}>
                                             <button

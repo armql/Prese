@@ -1,21 +1,52 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import { CartContext } from '../../../contexts/CartContext';
 import axiosClient from '../../../api/axios';
 import { useNavigate } from 'react-router-dom';
-
+import SimpleLoader from '../../Universal/core/SimpleLoader';
 
 export default function Checkout() {
   const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
-  const { currentUser, } = useStateContext();
+  const { currentUser, setCurrentUser, userToken } = useStateContext();
   const [orderPayment, setOrderPayment] = useState(false);
   const [numberCheck, setNumberCheck] = useState(false);
+  const [commentEnabled, setCommentEnabled] = useState(false);
+  const [validatingUser, setValidatingUser] = useState(true);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [comment, setComment] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
   const [globalError, setGlobalError] = useState('');
-  const [commentEnabled, setCommentEnabled] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userToken) {
+      navigate('../../');
+      return;
+    }
+
+    axiosClient
+      .get('/me')
+      .then(({ data }) => {
+        setCurrentUser(data);
+        if (data.role === 'manager') {
+          navigate('../../management')
+        } else if (data.role === 'driver') {
+          navigate('../../workdrive')
+        } else if (data.role === 'employee') {
+          navigate('../../workspace')
+        }
+        setValidatingUser(false);
+      })
+      .catch(() => {
+        setValidatingUser(false);
+      });
+  }, [navigate, setCurrentUser]);
+
+  if (validatingUser) {
+    return (
+      <SimpleLoader />
+    );
+  }
 
   const handleCheckout = (event) => {
     event.preventDefault();
@@ -72,7 +103,7 @@ export default function Checkout() {
     if (pattern.test(inputText)) {
       setPhoneNumberError('');
     } else {
-      setPhoneNumberError('Please enter a valid RKS phone number prefix ex. 044 265 455 or 045 551 441.');
+      setPhoneNumberError('Please enter a valid RKS phone number prefix.');
     }
   };
 
@@ -82,7 +113,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className='bg-white backdrop-filter backdrop-blur-lg bg-opacity-20'>
+    <div className={`${validatingUser ? "block" : "hidden"}bg-white backdrop-filter backdrop-blur-lg bg-opacity-20`}>
       <section>
         <div className="mx-auto grid grid-cols-1 md:grid-cols-2 bg-red-50">
           <div className="flex flex-col gap-10">
@@ -181,7 +212,15 @@ export default function Checkout() {
           </div>
 
           <div className="flex items-center justify-center bg-white py-12 md:py-24">
-            <div className="mx-auto max-w-lg px-4 lg:px-8">
+            <div className="relative mx-auto max-w-lg px-4 pt-10 lg:px-8">
+              <div className='absolute top-0 right-0'>
+                <div className='flex gap-2 hover:bg-red-100 border-transparent border-2 hover:border-red-200 hover:shadow-md rounded-sm p-1 font-semibold hover:text-red-900 text-sm hover:cursor-pointer hover:scale-105 active:scale-100 transition'>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                  </svg>
+                  Edit Profile
+                </div>
+              </div>
               <form className="grid grid-cols-6 gap-4">
                 <div className="col-span-6">
                   <label
@@ -195,7 +234,7 @@ export default function Checkout() {
                     type="text"
                     id="FirstName"
                     value={currentUser.name}
-
+                    disabled
                     className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                   />
                 </div>
@@ -209,7 +248,7 @@ export default function Checkout() {
                     type="email"
                     id="Email"
                     value={currentUser.email}
-
+                    disabled
                     className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                   />
                 </div>
@@ -331,7 +370,7 @@ export default function Checkout() {
                       <select
                         id="Country"
                         value={currentUser.city}
-
+                        disabled
                         className="relative w-full rounded-t-md border-gray-200 focus:z-10 sm:text-sm"
                       >
                         <option>Gjilan</option>
@@ -349,7 +388,7 @@ export default function Checkout() {
                         id="PostalCode"
                         placeholder="ZIP/Post Code"
                         value={currentUser.address}
-
+                        disabled
                         className="relative w-full rounded-b-md border-gray-200 focus:z-10 sm:text-sm"
                       />
                     </div>
@@ -366,7 +405,7 @@ export default function Checkout() {
                         <legend className="block text-sm font-medium text-gray-700">
                           Comment
                         </legend>
-                        <label className="sr-only" htmlFor="comment">
+                        <label className="sr-only" for="comment">
                           ZIP/Post Code
                         </label>
                         <textarea
@@ -381,14 +420,14 @@ export default function Checkout() {
                       </div>
                     )}
 
-                    <div className='flex items-center justify-around'>
+                    <div className='flex items-center gap-2'>
                       <input
                         type="checkbox"
                         checked={commentEnabled}
                         onChange={() => setCommentEnabled(!commentEnabled)}
-                        className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-2"
+                        className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-4"
                       />
-                      <label className="flex items-center text-md gap-2 text-gray-700">
+                      <label className="flex items-center font-light text-sm text-gray-700">
                         If you need a comment or special request for the order.
                       </label>
                     </div>

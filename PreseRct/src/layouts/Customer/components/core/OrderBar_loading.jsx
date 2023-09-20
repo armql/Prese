@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useStateContext } from '../../../../contexts/ContextProvider'
 
 export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilter, isActive, isDropdownOpen) {
+    const {currentUser} = useStateContext();
     return (
         <div className="bg-white">
             <div className="bg-white px-2.5 pb-2.5">
@@ -15,7 +17,7 @@ export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilte
                                 Search
                             </label>
                             <div className="flex items-center bg-white p-0.5 hover:cursor-pointer border border-gray-300 rounded-lg px-2">
-                                <button type="submit" className="flex items-center active:scale-105">
+                                <button onClick={() => ({})} disabled type="submit" className="flex items-center active:scale-105">
                                     <svg
                                         className="w-5 h-5 text-gray-500 dark:text-gray-400"
                                         aria-hidden="true"
@@ -44,6 +46,8 @@ export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilte
                             <button
                                 className={`bg-gray-100 active:scale-105 transition text-gray-700 p-1 rounded-lg ${isActive ? '' : ''}`}
                                 type='button'
+                                onClick={() => ({})}
+                                disabled
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -58,6 +62,7 @@ export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilte
                             </button>
                             <div className='grid grid-cols-1 bg-gray-100 active:scale-105 transition p-1 rounded-lg'>
                                 <button
+                                    disabled
                                     className='font-semibold text-xs focus:outline-none'
                                     onClick={handlelowhi}
                                     type='button'
@@ -73,7 +78,7 @@ export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilte
                                     {lowhiFilter ? 'LOW' : 'HIGH'}
                                 </button>
                             </div>
-                            <button className='bg-red-100 text-red-900 hover:bg-red-200 transition active:scale-105 text-xs font-semibold uppercase p-1 rounded-lg' type='submit'>
+                            <button disabled className='bg-red-100 text-red-900 hover:bg-red-200 transition active:scale-105 text-xs font-semibold uppercase p-1 rounded-lg' type='submit'>
                                 Clear
                             </button>
                         </div>
@@ -82,6 +87,7 @@ export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilte
 
                         <button
                             id="dropdownInformationButton"
+                            disabled
                             onClick={toggleDropdown}
                             data-dropdown-toggle="dropdownInformation"
                             className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 rounded-lg text-sm px-4 py-2 text-center font-medium inline-flex items-center"
@@ -113,11 +119,11 @@ export default function OrderBar_loading(toggleDropdown, handlelowhi, lowhiFilte
                                 <div>Prese products by</div>
                                 <div className="font-medium truncate">Bob's Favorites</div>
                             </div>
-                            <ul className="grid grid-cols-1 items-center justify-center text-center py-2 text-sm text-gray-700 dark:text-gray-200" ARIA-labelledby="dropdownInformationButton">
+                            <ul className="grid grid-cols-1 items-center justify-center text-center py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
 
                             </ul>
                             <div className="py-2">
-                                <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Bob's Food Emporium: Crazy deals, happy wallets! In a sonic, we've opened our hearts to serve you. What are you waiting for, /Name/? <Link to="#" className="underline hover:text-orange-900 text-gray-700 ">Check our deals here!</Link></p>
+                                <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Bob's Food Emporium: Crazy deals, happy wallets! In a sonic, we've opened our hearts to serve you. What are you waiting for, {currentUser.name}? <Link to="#" className="underline hover:text-orange-900 text-gray-700 ">Check our deals here!</Link></p>
                             </div>
                         </div>
                     </div>
