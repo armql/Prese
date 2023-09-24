@@ -92,7 +92,7 @@ export default function OrderMenu() {
             <div className="bg-white">
                 <div className="bg-white px-2.5 pb-2.5">
                     <div className='flex items-center justify-between'>
-                        <div className='grid grid-cols-1 items-center gap-4 sm:grid-cols-2'>
+                        <div className='grid grid-cols-1 items-center gap-4 sm:grid-cols-2 mt-2'>
                             <form>
                                 <label
                                     htmlFor="default-search"
@@ -100,8 +100,8 @@ export default function OrderMenu() {
                                 >
                                     Search
                                 </label>
-                                <div className="flex items-center bg-white p-0.5 hover:cursor-pointer border border-gray-300 rounded-lg px-2">
-                                    <button type='submit' onClick={() => {}} className="flex items-center active:scale-105">
+                                <div className="flex items-center gap-2">
+                                    <button type='submit' onClick={() => {}} className="flex items-center active:scale-105 active:ring-red-200 p-2">
                                         <svg
                                             className="w-5 h-5 text-gray-500 dark:text-gray-400"
                                             aria-hidden="true"
@@ -120,7 +120,7 @@ export default function OrderMenu() {
                                     <input
                                         type="search"
                                         id="default-search"
-                                        className="block w-full text-sm bg-white text-gray-900 border-none bg-transparent focus:outline-none focus:ring-0 focus:border-transparent"
+                                        className="block w-full text-sm bg-white text-gray-900 bg-transparent rounded-md border-2 border-gray-200 shadow-sm"
                                         placeholder="Any favorites?"
                                         required
                                     />
@@ -128,7 +128,7 @@ export default function OrderMenu() {
                             </form>
                             <div className='flex gap-2'>
                                 <button
-                                    className={`bg-gray-100 active:scale-105 transition text-gray-700 p-1 rounded-lg ${isActive ? '' : ''}`}
+                                    className={`bg-gray-100 active:scale-105 transition text-gray-700 p-1 rounded-lg ${isActive ? '' : 'ring-2 ring-red-200'}`}
                                     onClick={handleButtonClick}
                                     type='button'
                                 >
