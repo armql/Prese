@@ -239,7 +239,7 @@ class ProductController extends Controller
             throw new \Exception('The provided URL does not match the expected format for an image data URL.');
         }
 
-        $dir = '../GfcRct/src/layouts/Universal/images/';
+        $dir = '../../front/src/layouts/Universal/images/';
         $file = \Illuminate\Support\Str::random() . '.' . $type;
         $absolutePath = public_path($dir);
         $relativePath = $dir . $file;
