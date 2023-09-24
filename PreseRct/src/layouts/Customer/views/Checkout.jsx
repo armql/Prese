@@ -9,7 +9,7 @@ export default function Checkout() {
   const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
   const { currentUser, setCurrentUser, userToken } = useStateContext();
   const [orderPayment, setOrderPayment] = useState(false);
-  const [numberCheck, setNumberCheck] = useState(false);
+  const [infoCheck, setInfoCheck] = useState(false);
   const [commentEnabled, setCommentEnabled] = useState(false);
   const [validatingUser, setValidatingUser] = useState(true);
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -50,6 +50,8 @@ export default function Checkout() {
 
   const handleCheckout = (event) => {
     event.preventDefault();
+    
+    let numbercommentCheck = false; // Initialize as false
 
     if (phoneNumber.trim() === '') {
       setGlobalError('Phone number is empty, please write a number in order for us to get in contact.')
@@ -98,12 +100,14 @@ export default function Checkout() {
   const handlePhoneInput = (e) => {
     const inputText = e.target.value;
     setPhoneNumber(inputText);
-
+    
     const pattern = /^(044|045)\s?\d+$/;
-
+    
     if (pattern.test(inputText)) {
+      setInfoCheck(true);
       setPhoneNumberError('');
     } else {
+      setInfoCheck(false);
       setPhoneNumberError('Please enter a valid RKS phone number prefix.');
     }
   };
@@ -144,8 +148,8 @@ export default function Checkout() {
                   </li>
                 )
               }
-              <li class={`${numberCheck ? 'text-red-900' : 'text-gray-500'} flex items-center  space-x-2.5`}>
-                <span class={`${numberCheck ? 'bg-red-100 text-red-900 border-red-900' : 'text-gray-500 border-gray-500'} flex items-center justify-center w-8 h-8 border rounded-full shrink-0`}>
+              <li class={`${infoCheck ? 'text-red-900' : 'text-gray-500'} flex items-center  space-x-2.5`}>
+                <span class={`${infoCheck ? 'bg-red-100 text-red-900 border-red-900' : 'text-gray-500 border-gray-500'} flex items-center justify-center w-8 h-8 border rounded-full shrink-0`}>
                   2
                 </span>
                 <span>

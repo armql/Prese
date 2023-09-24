@@ -83,7 +83,7 @@ export default function HomeValidation_skeleton() {
                         </div>
                     </div></div>
                     <form className="w-full max-w-md mx-auto animate-pulse">
-                        <label for="default-email" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Email sign-up</label>
+                        <label htmlFor="default-email" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Email sign-up</label>
                         <div className="relative hover:cursor-wait">
                             <div className="absolute hover:cursor-wait inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

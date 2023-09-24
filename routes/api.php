@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,3 +75,5 @@ Route::put('userprofile/{id}/', [UserController::class, 'updateProfile']);
 Route::get('user/{id}/edit', [UserController::class, 'edit']);
 Route::delete('user/{id}/delete', [UserController::class, 'destroy']);
 Route::get('/users/count', [UserController::class, 'count']);
+
+Route::post('/subscribe', [SubscriberController::class, 'subscribe']);

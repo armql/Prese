@@ -5,12 +5,13 @@ import { useStateContext } from '../../../contexts/ContextProvider';
 import navLinksData from '../data/NavLinksData';
 import img from '../images/WEBDEV.svg';
 import NavbarSkeleton from './core/Navbar_skeleton';
+import { usePopup } from '../../../contexts/PopupContext';
 
 export default function Navbar() {
   const { currentUser, userToken, setCurrentUser, setUserToken } = useStateContext();
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [loadingUser, setLoadingUser] = useState(true);
-  const [activeLink, setActiveLink] = useState('');
+  const [activeLink, setActiveLink] = useState('Home');
 
   const navigate = useNavigate();
 
@@ -64,11 +65,11 @@ export default function Navbar() {
   return (
     <nav className={`z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-60`}>
       <div className="max-w-screen-l flex flex-wrap items-center justify-between mx-auto p-3">
-        <a href="#" className="flex items-center">
-          <span className="self-center text-2xl font-bold whitespace-nowrap text-red-500 dark:text-white">
+        <div className="flex items-center">
+          <span className="self-center text-2xl font-bold whitespace-nowrap text-red-500">
             <img src={img} alt="" className='w-24 h-24' />
           </span>
-        </a>
+        </div>
         <div className="flex md:order-2">
           <button
             data-collapse-toggle="navbar-cta"
@@ -94,7 +95,7 @@ export default function Navbar() {
           </button>
         </div>
         <div className={`items-center justify-between bg-transparent ${isMenuOpen ? 'flex' : 'hidden'} w-full md:flex md:w-auto md:order-2`} id="navbar-cta">
-          <ul className="flex flex-col font-medium md:p-0 mt-4 border border-none rounded-lg bg-transparent md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="flex flex-col font-medium md:p-0 mt-4 border border-none rounded-lg bg-transparent md:flex-row md:mt-0 md:border-0 md:bg-transparent gap-0 sm:gap-2">
             {filteredLinks.map((link) => (
               <li key={link.text}>
                 <NavLink

@@ -11,8 +11,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ __html: "" });
   const [submitting, setSubmitting] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     clearURLParameters();
@@ -59,7 +59,8 @@ export default function Login() {
           clearURLParameters();
           navigate('/app');
         } else if (data.user.role === 'driver') {
-          navigate('../workdrive');
+          clearURLParameters();
+          navigate('/workdrive');
           Swal.fire(
             `Hello ${data.user.name}!`,
             `Welcome back ${data.user.role}.`,

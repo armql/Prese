@@ -5,13 +5,16 @@ import router from './router.jsx'
 import './index.css'
 import { ContextProvider } from './contexts/ContextProvider.jsx'
 import { CartProvider } from './contexts/CartContext.jsx'
+import { PopupProvider } from './contexts/PopupContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <CartProvider>
-      <ContextProvider>
-        <RouterProvider router={router} />
-      </ContextProvider>
+      <PopupProvider>
+        <ContextProvider>
+          <RouterProvider router={router} />
+        </ContextProvider>
+      </PopupProvider>
     </CartProvider>
   </React.StrictMode>,
 )
