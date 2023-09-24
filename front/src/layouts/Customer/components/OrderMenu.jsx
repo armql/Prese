@@ -120,7 +120,7 @@ export default function OrderMenu() {
                                     <input
                                         type="search"
                                         id="default-search"
-                                        className="block w-full text-sm bg-white text-gray-900 border-none bg-transparent focus:outline-none focus:ring-0"
+                                        className="block w-full text-sm bg-white text-gray-900 border-none bg-transparent focus:outline-none focus:ring-0 focus:border-transparent"
                                         placeholder="Any favorites?"
                                         required
                                     />
