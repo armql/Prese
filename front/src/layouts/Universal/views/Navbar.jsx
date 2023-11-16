@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom'; // Remove NavLink import from 'react-router-dom';
-import axiosClient from '../../../api/axios';
-import { useStateContext } from '../../../contexts/ContextProvider';
-import navLinksData from '../data/NavLinksData';
-import img from '../images/WEBDEV.svg';
-import NavbarSkeleton from './core/Navbar_skeleton';
-import { usePopup } from '../../../contexts/PopupContext';
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom"; // Remove NavLink import from 'react-router-dom';
+import axiosClient from "../../../api/axios";
+import { useStateContext } from "../../../contexts/ContextProvider";
+import navLinksData from "../data/NavLinksData";
+import img from "../images/WEBDEV.svg";
+import NavbarSkeleton from "./core/Navbar_skeleton";
+import { usePopup } from "../../../contexts/PopupContext";
 
 export default function Navbar() {
-  const { currentUser, userToken, setCurrentUser, setUserToken } = useStateContext();
+  const { currentUser, userToken, setCurrentUser, setUserToken } =
+    useStateContext();
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [loadingUser, setLoadingUser] = useState(true);
-  const [activeLink, setActiveLink] = useState('Home');
+  const [activeLink, setActiveLink] = useState("Home");
 
   const navigate = useNavigate();
 
   useEffect(() => {
     axiosClient
-      .get('/me')
+      .get("/me")
       .then(({ data }) => {
         setCurrentUser(data);
         setLoadingUser(false);
@@ -28,9 +29,7 @@ export default function Navbar() {
   }, []);
 
   if (loadingUser) {
-    return (
-      <NavbarSkeleton />
-    )
+    return <NavbarSkeleton />;
   }
 
   const logout = (ev) => {
@@ -39,19 +38,19 @@ export default function Navbar() {
     axiosClient.post("/logout").then(() => {
       setCurrentUser({});
       setUserToken(null);
-      navigate('/home');
+      navigate("/home");
     });
   };
 
   let filteredLinks;
   if (userToken) {
-    if (currentUser.role === 'customer') {
+    if (currentUser.role === "customer") {
       filteredLinks = navLinksData.customerLinks;
-    } else if (currentUser.role === 'employee') {
+    } else if (currentUser.role === "employee") {
       filteredLinks = navLinksData.employeeLinks;
-    } else if (currentUser.role === 'driver') {
+    } else if (currentUser.role === "driver") {
       filteredLinks = navLinksData.driverLinks;
-    } else if (currentUser.role === 'manager') {
+    } else if (currentUser.role === "manager") {
       filteredLinks = navLinksData.managerLinks;
     }
   } else {
@@ -63,11 +62,13 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-60`}>
+    <nav
+      className={`z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-60`}
+    >
       <div className="max-w-screen-l flex flex-wrap items-center justify-between mx-auto p-3">
         <div className="flex items-center">
           <span className="self-center text-2xl font-bold whitespace-nowrap text-red-500">
-            <img src={img} alt="" className='w-24 h-24' />
+            <img src={img} alt="" className="w-24 h-24" />
           </span>
         </div>
         <div className="flex md:order-2">
@@ -94,16 +95,23 @@ export default function Navbar() {
             </svg>
           </button>
         </div>
-        <div className={`items-center justify-between bg-transparent ${isMenuOpen ? 'flex' : 'hidden'} w-full md:flex md:w-auto md:order-2`} id="navbar-cta">
+        <div
+          className={`items-center justify-between bg-transparent ${
+            isMenuOpen ? "flex" : "hidden"
+          } w-full md:flex md:w-auto md:order-2`}
+          id="navbar-cta"
+        >
           <ul className="flex flex-col font-medium md:p-0 mt-4 border border-none rounded-lg bg-transparent md:flex-row md:mt-0 md:border-0 md:bg-transparent gap-0 sm:gap-2">
             {filteredLinks.map((link) => (
               <li key={link.text}>
                 <NavLink
                   exact={true} // Use exact as a string
                   to={link.to}
-                  className={`nav-link hover:text-red-600 py-2 px-4 rounded-md ${activeLink === link.text ? 'text-red-500' : 'text-black'}`}
+                  className={`nav-link hover:text-red-600 py-2 px-4 rounded-md ${
+                    activeLink === link.text ? "text-red-500" : "text-black"
+                  }`}
                   onClick={(ev) => {
-                    if (link.text === 'Log out') {
+                    if (link.text === "Log out") {
                       logout(ev);
                     } else {
                       setActiveLink(link.text);
