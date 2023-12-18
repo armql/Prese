@@ -47,7 +47,7 @@ Contributions to Prese are welcome! To contribute, follow these steps:
 
 ## License
 
-This project is licensed under the [MIT License](link/to/license).
+This project is licensed under the [MIT License].
 
 ---
 
