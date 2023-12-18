@@ -1,8 +1,6 @@
-<h1 align="center">Prese - Food Online Delivery System</h1>
+Prese - Food Online Delivery System
 
-<p align="center">
-  Welcome to Prese, a sophisticated food delivery system built with React and Laravel. Prese offers a seamless experience for users with various roles, providing functionalities tailored to each role's specific needs.
-</p>
+Welcome to Prese, a sophisticated food delivery system built with React and Laravel. Prese offers a seamless experience for users with various roles, providing functionalities tailored to each role's specific needs.
 
 ## Features 🚀
 
