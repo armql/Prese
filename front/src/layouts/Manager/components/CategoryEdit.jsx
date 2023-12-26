@@ -19,7 +19,7 @@ const CategoryEdit = () => {
 
   useEffect(() => {
     axiosClient
-      .get(`/procedure/${id}/edit`) // Use the 'id' variable
+      .get(`/procedure/${id}/edit`)
       .then((res) => {
         console.log(res.data);
         setInputData(res.data.procedure);
