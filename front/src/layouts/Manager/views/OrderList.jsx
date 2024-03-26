@@ -40,7 +40,7 @@ export default function OrderList() {
 
    
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto">
             <title>Prese | Manage Orders</title>
             <OrderTable />
         </div>

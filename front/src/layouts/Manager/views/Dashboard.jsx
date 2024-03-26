@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import StatisticsSummary from '../components/StatisticsSummary';
-import StatisticsCharts from '../components/StatisticsCharts';
+// import StatisticsCharts from '../components/StatisticsCharts';
 import QuickAdd from '../components/QuickAdd';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../../contexts/ContextProvider';
@@ -24,9 +24,9 @@ function Dashboard() {
                 setCurrentUser(data);
                 if (data.role === 'customer') {
                     navigate('../../app')
-                }else if (data.role === 'driver') {
+                } else if (data.role === 'driver') {
                     navigate('../../workdrive')
-                }else if (data.role === 'employee') {
+                } else if (data.role === 'employee') {
                     navigate('../../workspace')
                 }
                 setValidatingUser(false);
@@ -41,11 +41,13 @@ function Dashboard() {
     }
 
     return (
-        <div className='bg-white backdrop-filter backdrop-blur-lg bg-opacity-20 p-10'>
-            <title>GFC | Dashboard List</title>
-            <StatisticsSummary />
-            <StatisticsCharts />
-            <QuickAdd />
+        <div className='relative bg-white backdrop-filter backdrop-blur-lg bg-opacity-20 p-10'>
+            <title>Prese | Dashboard List</title>
+            <div className='flex flex-col justify-between h-full gap-12'>
+                <StatisticsSummary />
+                {/* <StatisticsCharts /> */}
+                <QuickAdd />
+            </div>
         </div>
     );
 

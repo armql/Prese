@@ -7,12 +7,11 @@ export default function EmployeeDashboard() {
     const { currentUser } = useStateContext();
 
     return (
-        <div className="bg-white backdrop-blur-lg bg-opacity-60 h-screen">
+        <div className="bg-white backdrop-blur-lg bg-opacity-60">
             <title>Prese | Dashboard</title>
-            <div className='bg-white shadow-sm p-4 text-2xl'>
-                CE - {currentUser.name}
+            <div className='bg-red-100 text-gray-900 font-semibold text-xl shadow-sm p-4'>
+                Current Employee - <span className=''>{currentUser.name}</span>
             </div>
-            <Charts />
         </div>
     );
 }

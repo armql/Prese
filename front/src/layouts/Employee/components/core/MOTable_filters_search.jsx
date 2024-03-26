@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function MOTable_filters_search({ filter }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -8,38 +8,44 @@ export default function MOTable_filters_search({ filter }) {
   };
 
   const handleFilterClick = (status) => {
-    filter(status)
+    filter(status);
     setIsDropdownOpen(false);
   };
 
   return (
-    <div className="flex items-center justify-between p-2 bg-white rounded-md shadow-xl backdrop-filter backdrop-blur-lg bg-opacity-90 dark:bg-gray-800">
+    <div className="flex items-center justify-between p-2 bg-white rounded-md shadow-xl backdrop-filter backdrop-blur-lg bg-opacity-90">
       <div className="flow-root items-center">
         <button
           id="dropdownActionButton"
           data-dropdown-toggle="dropdownAction"
-          className="inline-flex items-center text-gray-500 bg-gray-100 border border-none focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+          className="inline-flex items-center text-gray-500 bg-gray-100 border border-none focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5"
           type="button"
           onClick={toggleDropdown}
         >
           <span className="sr-only">Order by</span>
           Order by
           <svg
-            className={`w-3 h-3 ml-2 transition-transform ${isDropdownOpen ? 'rotate-180' : ''
-              }`}
+            className={`w-3 h-3 ml-2 transition-transform ${
+              isDropdownOpen ? "rotate-180" : ""
+            }`}
             aria-hidden="true"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </button>
         {isDropdownOpen && (
           <div
             id="dropdownAction"
-            className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+            className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
           >
             <ul
               className="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -48,8 +54,8 @@ export default function MOTable_filters_search({ filter }) {
               <li>
                 <a
                   href="#"
-                  className={`block px-4 py-2 hover:bg-green-100 dark:hover:bg-gray-600 dark:hover:text-white $`}
-                  onClick={() => handleFilterClick('latest')}
+                  className={`block px-4 py-2 hover:bg-green-100 $`}
+                  onClick={() => handleFilterClick("latest")}
                 >
                   Latest Orders
                 </a>
@@ -57,8 +63,8 @@ export default function MOTable_filters_search({ filter }) {
               <li>
                 <a
                   href="#"
-                  className={`block px-4 py-2 hover:bg-lime-100 dark:hover:bg-gray-600 dark:hover:text-white`}
-                  onClick={() => handleFilterClick('oldest')}
+                  className={`block px-4 py-2 hover:bg-lime-100`}
+                  onClick={() => handleFilterClick("oldest")}
                 >
                   Oldest orders
                 </a>

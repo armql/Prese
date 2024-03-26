@@ -46,7 +46,7 @@ export default function UserList() {
 
     return (
         <div id="parent">
-            <title>GFC | User List</title>
+            <title>Prese | User List</title>
             <div className="flex justify-between p-1 bg-white">
                 <div className="p-2">
                     <Link

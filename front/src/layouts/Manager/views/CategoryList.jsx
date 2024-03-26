@@ -42,7 +42,7 @@ export default function CategoryList() {
 
     return (
         <div id="parent">
-            <title>GFC | Category List</title>
+            <title>Prese | Category List</title>
             <div className="flex justify-between p-1 bg-white">
                 <div className="p-2">
                     <Link

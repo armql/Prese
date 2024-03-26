@@ -210,4 +210,28 @@ class UserController extends Controller
         $count = User::all()->count();
         return response()->json(['count' => $count]);
     }
+
+    /**
+     * Get the name of a user based on their ID.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserName(int $id)
+    {
+        $user = DB::table('users')->select('name')->where('id', $id)->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'name' => $user->name
+        ]);
+    }
+
 }

@@ -1,12 +1,15 @@
-import { createContext, useState, useEffect } from 'react'
-import axiosClient from '../api/axios';
-import { useStateContext } from './ContextProvider';
-import { useNavigate } from 'react-router-dom';
+import { createContext, useState, useEffect } from "react";
+import { useStateContext } from "./ContextProvider";
 
-export const CartContext = createContext()
+export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
+  const { userToken } = useStateContext();
+  const [cartItems, setCartItems] = useState(
+    localStorage.getItem("cart_items")
+      ? JSON.parse(localStorage.getItem("cart_items"))
+      : []
+  );
 
   const addToCart = (item) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
@@ -45,20 +48,22 @@ export const CartProvider = ({ children }) => {
   };
 
   const getCartTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem("cart_items", JSON.stringify(cartItems));
   }, [cartItems]);
 
   useEffect(() => {
-    const cartItems = localStorage.getItem("cartItems");
+    const cartItems = localStorage.getItem("cart_items");
     if (cartItems) {
       setCartItems(JSON.parse(cartItems));
     }
   }, []);
-
 
   return (
     <CartContext.Provider

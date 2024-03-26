@@ -10,6 +10,30 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+
+    public function paginate(Request $request)
+    {
+        $perPage = $request->input('perPage', 5);
+        $categories = Category::paginate($perPage);
+        $currentPage = $categories->currentPage();
+        $formattedCategories = $categories->map(function ($category) {
+            $userName = DB::table('users')->where('id', $category->user_id)->value('name');
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+                'created_at' => $category->created_at,
+                'user' => $userName,
+            ];
+        });
+        return response()->json([
+            'categories' => $formattedCategories,
+            'current_page' => $currentPage,
+            'total' => $categories->total(),
+            'per_page' => $categories->perPage(),
+            'last_page' => $categories->lastPage(),
+        ]);
+    }
+    
     /**
      * Create a new category.
      *
@@ -97,28 +121,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Retrieve a specific category for display.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function display($id)
-    {
-        $category = Category::find($id);
-
-        if (!$category) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'No category found'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'category' => $category
-        ]);
-    }
 
     /**
      * Delete a specific category.
@@ -185,30 +187,6 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * Get the name of a user based on their ID.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getUserName(int $id)
-    {
-        $user = DB::table('users')->select('name')->where('id', $id)->first();
-
-        if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'name' => $user->name
-        ]);
-    }
-
-
     public function categoryname()
     {
         $categories = Category::all('name');
@@ -218,20 +196,4 @@ class CategoryController extends Controller
         ], 200);
     }
 
-    public function getCategories(Request $request)
-    {
-        $perPage = $request->input('perPage', 10);
-
-        $categories = Category::paginate($perPage);
-
-        $currentPage = $request->input('page', 1);
-
-        return response()->json([
-            'categories' => $categories->items(),
-            'current_page' => $currentPage,
-            'total' => $categories->total(),
-            'per_page' => $categories->perPage(),
-            'last_page' => $categories->lastPage(),
-        ]);
-    }
 }

@@ -34,27 +34,4 @@ class ProductRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'preview' => 'nullable|string',
-            'name.required' => 'Product name is required.',
-            'name.string' => 'Product name must be a string.',
-            'name.max' => 'Product name may not be greater than 255 characters.',
-            'category_id.required' => 'Category ID is required.',
-            'description.required' => 'Product description is required.',
-            'description.string' => 'Product description must be a string.',
-            'retail_price.required' => 'Product retail price is required.',
-            'retail_price.numeric' => 'Product retail price must be a number.',
-            'retail_price.min' => 'Product retail price must be greater than or equal to 0.',
-            'market_price.required' => 'Product market price is required.',
-            'market_price.numeric' => 'Product market price must be a number.',
-            'market_price.min' => 'Product market price must be greater than or equal to 0.',
-        ];
-    }
 }

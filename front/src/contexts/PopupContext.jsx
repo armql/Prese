@@ -11,6 +11,10 @@ export function PopupProvider({ children }) {
 
   const showAlert = () => {
     setShowPopup(true);
+
+    setTimeout(() => {
+      hideAlert();
+    }, 3000);
   };
 
   const hideAlert = () => {

@@ -9,17 +9,19 @@ const StateContext = createContext({
 
 export const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
-  const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '');
+  const [userToken, _setUserToken] = useState(
+    localStorage.getItem("TOKEN") || ""
+  );
   const lastActivityTimeRef = useRef(new Date().getTime());
 
   const setUserToken = (token) => {
     if (token) {
-      localStorage.setItem('TOKEN', token);
-      const expirationTime = new Date().getTime() + 6 * 60 * 60 * 1000; 
-      localStorage.setItem('TOKEN_EXPIRATION', expirationTime);
+      localStorage.setItem("TOKEN", token);
+      const expirationTime = new Date().getTime() + 6 * 60 * 60 * 1000;
+      localStorage.setItem("TOKEN_EXPIRATION", expirationTime);
     } else {
-      localStorage.removeItem('TOKEN');
-      localStorage.removeItem('TOKEN_EXPIRATION');
+      localStorage.removeItem("TOKEN");
+      localStorage.removeItem("TOKEN_EXPIRATION");
     }
     _setUserToken(token);
     lastActivityTimeRef.current = new Date().getTime();
@@ -27,7 +29,7 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     const checkTokenExpiration = () => {
-      const expirationTime = localStorage.getItem('TOKEN_EXPIRATION');
+      const expirationTime = localStorage.getItem("TOKEN_EXPIRATION");
       const lastActivityTime = lastActivityTimeRef.current;
       const currentTime = new Date().getTime();
       const inactiveTime = currentTime - lastActivityTime;
@@ -49,11 +51,11 @@ export const ContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleUserActivity);
-    window.addEventListener('keydown', handleUserActivity);
+    window.addEventListener("mousemove", handleUserActivity);
+    window.addEventListener("keydown", handleUserActivity);
     return () => {
-      window.removeEventListener('mousemove', handleUserActivity);
-      window.removeEventListener('keydown', handleUserActivity);
+      window.removeEventListener("mousemove", handleUserActivity);
+      window.removeEventListener("keydown", handleUserActivity);
     };
   }, []);
 

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/signup-style.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "../../../api/axios";
 import Signup_skeleton from "./core/Signup_skeleton";
 import { usePopup } from "../../../contexts/PopupContext";
@@ -17,7 +17,6 @@ export default function Signup() {
   const { showAlert } = usePopup();
 
   const navigate = useNavigate();
-
 
   const signupValidation = (ev) => {
     ev.preventDefault();
@@ -38,7 +37,11 @@ export default function Signup() {
         navigate("/home");
       })
       .catch((error) => {
-        if (error.response && error.response.data && error.response.data.errors) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
           const errors = error.response.data.errors;
           setError({
             name: errors.name ? errors.name.join("<br>") : "",
@@ -52,7 +55,11 @@ export default function Signup() {
             address: errors.address ? errors.address.join("<br>") : "",
             other: errors.error ? errors.error.join("<br>") : "",
           });
-        } else if (error.response && error.response.data && error.response.data.error) {
+        } else if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
           setError({
             email: "",
             password: "",
@@ -68,12 +75,11 @@ export default function Signup() {
   };
 
   if (submitting) {
-    return <Signup_skeleton />
+    return <Signup_skeleton />;
   }
 
   return (
     <div className="relative bg-black backdrop-filter backdrop-blur-xl bg-opacity-50">
-
       <div className="flex items-center justify-center">
         <title>Prese | Signup</title>
 
@@ -84,12 +90,14 @@ export default function Signup() {
               <div className="form-group mb-2 w-82 md:w-80">
                 <label
                   htmlFor="text"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
                   Username
                 </label>
                 <input
                   type="text"
                   name="username"
+                  autoComplete="off"
                   className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="Enter username"
                   value={username}
@@ -99,12 +107,14 @@ export default function Signup() {
               <div className="form-group mb-2 w-82 md:w-80">
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
                   Email
                 </label>
                 <input
                   type="email"
                   name="email"
+                  autoComplete="off"
                   className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="Enter email"
                   value={email}
@@ -115,7 +125,8 @@ export default function Signup() {
             <div className="form-group mt-2 w-82">
               <label
                 htmlFor="address"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
                 City
               </label>
               <select
@@ -134,12 +145,12 @@ export default function Signup() {
                 <option value="Peja">Peja</option>
                 <option value="Ferizaj">Ferizaj</option>
               </select>
-
             </div>
             <div className="form-group mt-2 w-82">
               <label
                 htmlFor="address"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
                 Address
               </label>
               <input
@@ -149,6 +160,7 @@ export default function Signup() {
                 className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Write your address here"
                 value={address}
+                autoComplete="off"
                 onChange={(ev) => setAddress(ev.target.value)}
               />
             </div>
@@ -156,7 +168,8 @@ export default function Signup() {
               <div className="form-group mt-2 w-82 md:w-80">
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium dark:text-white">
+                  className="block mb-2 text-sm font-medium"
+                >
                   Password
                 </label>
                 <input
@@ -165,18 +178,21 @@ export default function Signup() {
                   className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="Enter password"
                   value={password}
+                  autoComplete="off"
                   onChange={(ev) => setPassword(ev.target.value)}
                 />
               </div>
               <div className="form-group mt-2 w-82 md:w-80">
                 <label
                   htmlFor="confirmPassword"
-                  className="block mb-2 text-sm font-medium dark:text-white">
+                  className="block mb-2 text-sm font-medium"
+                >
                   Confirm Password
                 </label>
                 <input
                   type="password"
                   name="confirm-password"
+                  autoComplete="off"
                   className="bg-white border-2 shadow-sm border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-2"
                   placeholder="Confirm password"
                   value={passwordConfirmation}
@@ -186,49 +202,116 @@ export default function Signup() {
             </div>
 
             {error.password && (
-              <div class="flex p-2 mt-4 text-sm text-red-600 rounded-lg bg-red-50" role="alert">
-                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                <span class="sr-only">Danger</span>
-                <div>
-                  <span class="font-medium">Ensure that these requirements are met:</span>
-                  <ul class="mt-1.5 ml-4 list-disc list-inside">
-                    {error.name && <li dangerouslySetInnerHTML={{ __html: error.name }}></li>}
-                    {error.email && <li dangerouslySetInnerHTML={{ __html: error.email }}></li>}
-                    {error.city && <li dangerouslySetInnerHTML={{ __html: error.city }}></li>}
-                    {error.address && <li dangerouslySetInnerHTML={{ __html: error.address }}></li>}
-                    {error.password && <li dangerouslySetInnerHTML={{ __html: error.password }}></li>}
+              <div
+                className="flex p-2 mt-4 text-sm text-red-600 rounded-lg bg-red-50"
+                role="alert"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="flex-shrink-0 inline w-5 h-5 mr-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                <span className="sr-only">Danger</span>
+                <div className="w-full">
+                  <span className="font-medium">
+                    Ensure that these requirements are met:
+                  </span>
+                  <ul className="mt-1.5 ml-4 list-disc list-inside">
+                    {error.name && (
+                      <li dangerouslySetInnerHTML={{ __html: error.name }}></li>
+                    )}
+                    {error.email && (
+                      <li
+                        dangerouslySetInnerHTML={{ __html: error.email }}
+                      ></li>
+                    )}
+                    {error.city && (
+                      <li dangerouslySetInnerHTML={{ __html: error.city }}></li>
+                    )}
+                    {error.address && (
+                      <li
+                        dangerouslySetInnerHTML={{ __html: error.address }}
+                      ></li>
+                    )}
+                    {error.password && (
+                      <li
+                        dangerouslySetInnerHTML={{ __html: error.password }}
+                      ></li>
+                    )}
                   </ul>
                 </div>
               </div>
             )}
             {error.other && (
-              <div class="flex p-2 mt-4 text-sm text-red-600 rounded-lg bg-red-50" role="alert">
-                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                <span class="sr-only">Danger</span>
+              <div
+                className="flex p-2 mt-4 text-sm text-red-600 rounded-lg bg-red-50"
+                role="alert"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="flex-shrink-0 inline w-5 h-5 mr-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                <span className="sr-only">Danger</span>
                 <div>
-                  <span class="font-medium">Ensure that these requirements are met:</span>
-                  <ul class="mt-1.5 ml-4 list-disc list-inside">
-                    {error.other && <li dangerouslySetInnerHTML={{ __html: error.other }}></li>}
+                  <span className="font-medium">
+                    Ensure that these requirements are met:
+                  </span>
+                  <ul className="mt-1.5 ml-4 list-disc list-inside">
+                    {error.other && (
+                      <li
+                        dangerouslySetInnerHTML={{ __html: error.other }}
+                      ></li>
+                    )}
                   </ul>
                 </div>
               </div>
             )}
 
-
-            <button type="submit" className="w-full mt-4 py-2.5 px-2 rounded bg-red-500 hover:scale-105 transition active:scale-100 hover:bg-red-600 text-white font-bold active:cursor-wait">
+            <button
+              type="submit"
+              className="w-full mt-4 py-2.5 px-2 rounded bg-red-500 hover:scale-105 transition active:scale-100 hover:bg-red-600 text-white font-bold active:cursor-wait"
+            >
               Sign Up
             </button>
 
             <p className="text-center mt-2 mb-3">
               Already have an account?{" "}
-              <Link to="/login" className="text-red-500 hover:text-red-700 underline focus:cursor-wait" >Login</Link>
+              <Link
+                to="/login"
+                className="text-red-500 hover:text-red-700 underline focus:cursor-wait"
+              >
+                Login
+              </Link>
             </p>
-            <Link type="button" to='../' className="text-center hover:border-gray-500 hover:shadow-sm border-transparent transition border-2 w-full mt-2 p-2 rounded active:cursor-wait hover:bg-gray-50">
-              CONTINUE AS GUEST
-            </Link>
+            <div className="w-full flex h-full">
+              <Link
+                type="button"
+                to="../"
+                className="text-center hover:border-gray-500 hover:shadow-sm border-gray-500 bg-white transition border-2 w-full mt-2 p-2 rounded active:cursor-wait hover:bg-gray-50"
+              >
+                CONTINUE AS GUEST
+              </Link>
+            </div>
           </form>
         </div>
       </div>
     </div>
   );
-};
+}

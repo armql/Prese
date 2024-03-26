@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom"; // Remove NavLink import from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import axiosClient from "../../../api/axios";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import navLinksData from "../data/NavLinksData";
 import img from "../images/WEBDEV.svg";
 import NavbarSkeleton from "./core/Navbar_skeleton";
-import { usePopup } from "../../../contexts/PopupContext";
 
 export default function Navbar() {
   const { currentUser, userToken, setCurrentUser, setUserToken } =
     useStateContext();
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [loadingUser, setLoadingUser] = useState(true);
-  const [activeLink, setActiveLink] = useState("Home");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     axiosClient
@@ -26,7 +25,7 @@ export default function Navbar() {
       .catch(() => {
         setLoadingUser(false);
       });
-  }, []);
+  }, [setCurrentUser]);
 
   if (loadingUser) {
     return <NavbarSkeleton />;
@@ -36,6 +35,9 @@ export default function Navbar() {
     ev.preventDefault();
 
     axiosClient.post("/logout").then(() => {
+      if (currentUser.role === "customer") {
+        localStorage.removeItem("cart_items");
+      }
       setCurrentUser({});
       setUserToken(null);
       navigate("/home");
@@ -105,16 +107,15 @@ export default function Navbar() {
             {filteredLinks.map((link) => (
               <li key={link.text}>
                 <NavLink
-                  exact={true} // Use exact as a string
                   to={link.to}
                   className={`nav-link hover:text-red-600 py-2 px-4 rounded-md ${
-                    activeLink === link.text ? "text-red-500" : "text-black"
+                    location.pathname === link.to
+                      ? "text-red-500"
+                      : "text-black"
                   }`}
                   onClick={(ev) => {
                     if (link.text === "Log out") {
                       logout(ev);
-                    } else {
-                      setActiveLink(link.text);
                     }
                   }}
                 >

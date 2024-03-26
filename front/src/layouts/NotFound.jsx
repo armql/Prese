@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function NotFound() {
     return (
@@ -16,7 +17,7 @@ export default function NotFound() {
                             <p className='text-xl font-normal text-start'>Sorry about that! Please visit our hompage to get where you need to go.</p>
                         </div>
                         <div className='flex items-center justify-center text-center pt-14 bg-red-200 hover:bg-red-300 transition '>
-                            <button className=' p-2 text-red-600 transition-all font-bold hover:underline rounded-full'>Take me there</button>
+                            <Link to={'/'} className=' p-2 text-red-600 transition-all font-bold hover:underline rounded-full'>Take me there</Link>
                         </div>
                     </div>
                 </div>
